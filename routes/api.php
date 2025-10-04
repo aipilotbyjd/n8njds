@@ -26,6 +26,8 @@ Route::group([
     Route::group(['as' => 'auth.'], function () {
         Route::post('/register', [\App\Http\Controllers\Api\V1\Auth\RegisterController::class, 'register'])->name('register');
         Route::post('/login', [\App\Http\Controllers\Api\V1\Auth\LoginController::class, 'login'])->name('login');
+        Route::post('/forgot-password', [\App\Http\Controllers\Api\V1\Auth\PasswordResetController::class, 'sendResetLinkEmail'])->name('password.email');
+        Route::post('/reset-password', [\App\Http\Controllers\Api\V1\Auth\PasswordResetController::class, 'reset'])->name('password.store');
     });
 
     // Protected routes (require authentication)
@@ -35,6 +37,9 @@ Route::group([
             Route::post('/logout', [\App\Http\Controllers\Api\V1\Auth\LoginController::class, 'logout'])->name('logout');
             Route::get('/user', [\App\Http\Controllers\Api\V1\Auth\LoginController::class, 'me'])->name('user');
             Route::get('/profile', [\App\Http\Controllers\Api\V1\UserProfileController::class, 'index'])->name('profile');
+            Route::post('/refresh', [\App\Http\Controllers\Api\V1\Auth\LoginController::class, 'refresh'])->name('refresh');
+            Route::post('/email/verification-notification', [\App\Http\Controllers\Api\V1\Auth\EmailVerificationController::class, 'resend'])->name('verification.send');
+            Route::get('/verify-email/{id}/{hash}', [\App\Http\Controllers\Api\V1\Auth\EmailVerificationController::class, 'verify'])->name('verification.verify')->middleware('signed');
         });
 
         // User management domain

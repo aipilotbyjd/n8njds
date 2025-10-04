@@ -67,4 +67,29 @@ class LoginController extends Controller
             'user' => $request->user()
         ]);
     }
+
+    /**
+     * Refresh the user's token.
+     */
+    public function refresh(Request $request): JsonResponse
+    {
+        $user = $request->user();
+        
+        // Revoke current token
+        $tokenId = $request->bearerToken();
+        $token = $user->tokens()->where('id', $tokenId)->first();
+        if ($token) {
+            $token->revoke();
+        }
+
+        // Create a new token for the user
+        $newToken = $user->createToken('auth-token')->accessToken;
+
+        return response()->json([
+            'message' => 'Token refreshed successfully',
+            'user' => $user,
+            'token' => $newToken,
+            'token_type' => 'Bearer',
+        ]);
+    }
 }

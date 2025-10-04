@@ -54,9 +54,10 @@ class UserAuthenticationService implements ServiceInterface
         // Revoke the current token
         $tokenId = request()->bearerToken();
         
-        $token = $user->tokens()->where('id', $tokenId)->first();
-        if ($token) {
-            $token->revoke();
+        // Get the current access token from Passport
+        $accessToken = auth()->user()->token();
+        if ($accessToken) {
+            $accessToken->revoke();
             return true;
         }
 

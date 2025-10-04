@@ -1,0 +1,1675 @@
+{
+  "info": {
+    "_postman_id": "e2b8c7d4-5f1a-4b8c-9d7e-f3a2b1c4d5e6",
+    "name": "n8n Backend API Collection",
+    "description": "Complete API collection for the n8n backend platform. This collection includes all authentication endpoints, user management, organizations, credentials, workflows, and administrative functions.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": "1.0.0"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "description": "Authentication endpoints for user registration, login, logout, password reset, and email verification",
+      "item": [
+        {
+          "name": "Register User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"{{user_name}}\",\n  \"email\": \"{{user_email}}\",\n  \"password\": \"{{user_password}}\",\n  \"password_confirmation\": \"{{user_password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/register",
+              "protocol": "http",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "register"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{user_email}}\",\n  \"password\": \"{{user_password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/login",
+              "protocol": "http",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "login"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Logout User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/logout",
+              "protocol": "http",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "logout"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get User Profile",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/user",
+              "protocol": "http",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "user"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Profile (Alternative)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/profile",
+              "protocol": "http",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "profile"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Refresh Token",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/refresh",
+              "protocol": "http",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "refresh"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Forgot Password",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"{{user_email}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/forgot-password",
+              "protocol": "http",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "forgot-password"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Reset Password",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"token\": \"{{reset_token}}\",\n  \"email\": \"{{user_email}}\",\n  \"password\": \"{{new_password}}\",\n  \"password_confirmation\": \"{{new_password}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/reset-password",
+              "protocol": "http",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "reset-password"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Resend Email Verification",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/email/verification-notification",
+              "protocol": "http",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "email", "verification-notification"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "User Management",
+      "description": "Endpoints for managing user profiles",
+      "item": [
+        {
+          "name": "Get User Profile",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/user/profile",
+              "protocol": "http",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "user", "profile"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update User Profile",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"{{updated_name}}\",\n  \"email\": \"{{updated_email}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/user/profile",
+              "protocol": "http",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "user", "profile"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Organizations",
+      "description": "Endpoints for managing organizations and memberships",
+      "item": [
+        {
+          "name": "Get Organizations",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/organizations",
+              "protocol": "http",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "organizations"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Organization",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"{{organization_name}}\",\n  \"description\": \"{{organization_description}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/organizations",
+              "protocol": "http",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "organizations"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Organization",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/organizations/{{organization_id}}",
+              "protocol": "http",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "organizations", "{{organization_id}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Organization",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"{{updated_organization_name}}\",\n  \"description\": \"{{updated_organization_description}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/organizations/{{organization_id}}",
+              "protocol": "http",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "organizations", "{{organization_id}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Organization",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/organizations/{{organization_id}}",
+              "protocol": "http",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "organizations", "{{organization_id}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Switch to Organization",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/organizations/{{organization_id}}/switch",
+              "protocol": "http",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "organizations", "{{organization_id}}", "switch"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Organization Members",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/organizations/{{organization_id}}/members",
+              "protocol": "http",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "organizations", "{{organization_id}}", "members"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Add Organization Member",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user_email\": \"{{member_email}}\",\n  \"role\": \"{{member_role}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/organizations/{{organization_id}}/members",
+              "protocol": "http",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "organizations", "{{organization_id}}", "members"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Remove Organization Member",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/organizations/{{organization_id}}/members/{{member_id}}",
+              "protocol": "http",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "organizations", "{{organization_id}}", "members", "{{member_id}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Organization Member",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"role\": \"{{updated_member_role}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/organizations/{{organization_id}}/members/{{member_id}}",
+              "protocol": "http",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "organizations", "{{organization_id}}", "members", "{{member_id}}"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Credentials",
+      "description": "Endpoints for managing credentials",
+      "item": [
+        {
+          "name": "Get Credentials",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/credentials",
+              "protocol": "http",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "credentials"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Credential",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"{{credential_name}}\",\n  \"type\": \"{{credential_type}}\",\n  \"data\": {{credential_data}}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/credentials",
+              "protocol": "http",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "credentials"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Credential",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/credentials/{{credential_id}}",
+              "protocol": "http",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "credentials", "{{credential_id}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Credential",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"{{updated_credential_name}}\",\n  \"type\": \"{{updated_credential_type}}\",\n  \"data\": {{updated_credential_data}}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/credentials/{{credential_id}}",
+              "protocol": "http",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "credentials", "{{credential_id}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Credential",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/credentials/{{credential_id}}",
+              "protocol": "http",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "credentials", "{{credential_id}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Rotate Credential",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/credentials/{{credential_id}}/rotate",
+              "protocol": "http",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "credentials", "{{credential_id}}", "rotate"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Workflows",
+      "description": "Endpoints for managing workflows",
+      "item": [
+        {
+          "name": "Get Workflows",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/workflows",
+              "protocol": "http",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "workflows"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Workflow",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"{{workflow_name}}\",\n  \"description\": \"{{workflow_description}}\",\n  \"nodes\": [],\n  \"connections\": {}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/workflows",
+              "protocol": "http",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "workflows"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Workflow",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/workflows/{{workflow_id}}",
+              "protocol": "http",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "workflows", "{{workflow_id}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Workflow",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"{{updated_workflow_name}}\",\n  \"description\": \"{{updated_workflow_description}}\",\n  \"nodes\": [],\n  \"connections\": {}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/workflows/{{workflow_id}}",
+              "protocol": "http",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "workflows", "{{workflow_id}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Workflow",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/workflows/{{workflow_id}}",
+              "protocol": "http",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "workflows", "{{workflow_id}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Workflow Executions",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/workflows/{{workflow_id}}/executions",
+              "protocol": "http",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "workflows", "{{workflow_id}}", "executions"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Execute Workflow",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/workflows/{{workflow_id}}/execute",
+              "protocol": "http",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "workflows", "{{workflow_id}}", "execute"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Workflow Nodes",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/workflows/{{workflow_id}}/nodes",
+              "protocol": "http",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "workflows", "{{workflow_id}}", "nodes"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Workflow Executions",
+      "description": "Endpoints for managing workflow executions",
+      "item": [
+        {
+          "name": "Get Executions",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/executions",
+              "protocol": "http",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "executions"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Execution",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"workflow_id\": \"{{workflow_id}}\",\n  \"data\": {}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/executions",
+              "protocol": "http",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "executions"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Execution",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/executions/{{execution_id}}",
+              "protocol": "http",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "executions", "{{execution_id}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Execution",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"{{execution_status}}\",\n  \"result\": {}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/v1/executions/{{execution_id}}",
+              "protocol": "http",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "executions", "{{execution_id}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Execution",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/executions/{{execution_id}}",
+              "protocol": "http",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "executions", "{{execution_id}}"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Execution Logs",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/executions/{{execution_id}}/logs",
+              "protocol": "http",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "executions", "{{execution_id}}", "logs"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Nodes",
+      "description": "Endpoints for managing nodes",
+      "item": [
+        {
+          "name": "Get Nodes",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/nodes",
+              "protocol": "http",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "nodes"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Node Config",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/nodes/{{node_id}}/config",
+              "protocol": "http",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "nodes", "{{node_id}}", "config"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Administrative",
+      "description": "Administrative functions only accessible to admin users",
+      "item": [
+        {
+          "name": "Admin Dashboard",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/admin/dashboard",
+              "protocol": "http",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "admin", "dashboard"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Admin Organizations",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/admin/organizations",
+              "protocol": "http",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "admin", "organizations"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Admin Users",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/v1/admin/users",
+              "protocol": "http",
+              "host": ["{{base_url}}"],
+              "path": ["api", "v1", "admin", "users"]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "id": "pre-request-script",
+        "type": "text/javascript",
+        "exec": [
+          "// Pre-request script to set environment variables",
+          "// This runs before each request"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "id": "test-script",
+        "type": "text/javascript",
+        "exec": [
+          "// Test script to validate responses",
+          "// This runs after each response"
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "id": "base_url",
+      "key": "base_url",
+      "value": "http://localhost:8000",
+      "type": "string",
+      "description": "Base URL of the API server"
+    },
+    {
+      "id": "user_name",
+      "key": "user_name",
+      "value": "John Doe",
+      "type": "string",
+      "description": "Name of the test user"
+    },
+    {
+      "id": "user_email",
+      "key": "user_email",
+      "value": "john.doe@example.com",
+      "type": "string",
+      "description": "Email of the test user"
+    },
+    {
+      "id": "user_password",
+      "key": "user_password",
+      "value": "Password123!",
+      "type": "string",
+      "description": "Password of the test user"
+    },
+    {
+      "id": "access_token",
+      "key": "access_token",
+      "value": "",
+      "type": "string",
+      "description": "JWT access token after successful authentication"
+    },
+    {
+      "id": "reset_token",
+      "key": "reset_token",
+      "value": "",
+      "type": "string",
+      "description": "Password reset token from email"
+    },
+    {
+      "id": "new_password",
+      "key": "new_password",
+      "value": "NewPassword123!",
+      "type": "string",
+      "description": "New password for reset"
+    },
+    {
+      "id": "updated_name",
+      "key": "updated_name",
+      "value": "Updated Name",
+      "type": "string",
+      "description": "Updated name for user profile"
+    },
+    {
+      "id": "updated_email",
+      "key": "updated_email",
+      "value": "updated@example.com",
+      "type": "string",
+      "description": "Updated email for user profile"
+    },
+    {
+      "id": "organization_name",
+      "key": "organization_name",
+      "value": "Test Organization",
+      "type": "string",
+      "description": "Name of the test organization"
+    },
+    {
+      "id": "organization_description",
+      "key": "organization_description",
+      "value": "A test organization for development",
+      "type": "string",
+      "description": "Description of the test organization"
+    },
+    {
+      "id": "organization_id",
+      "key": "organization_id",
+      "value": "1",
+      "type": "string",
+      "description": "ID of the organization"
+    },
+    {
+      "id": "updated_organization_name",
+      "key": "updated_organization_name",
+      "value": "Updated Organization",
+      "type": "string",
+      "description": "Updated name of the organization"
+    },
+    {
+      "id": "updated_organization_description",
+      "key": "updated_organization_description",
+      "value": "Updated description of the organization",
+      "type": "string",
+      "description": "Updated description of the organization"
+    },
+    {
+      "id": "member_email",
+      "key": "member_email",
+      "value": "member@example.com",
+      "type": "string",
+      "description": "Email of the organization member"
+    },
+    {
+      "id": "member_role",
+      "key": "member_role",
+      "value": "member",
+      "type": "string",
+      "description": "Role of the organization member"
+    },
+    {
+      "id": "updated_member_role",
+      "key": "updated_member_role",
+      "value": "admin",
+      "type": "string",
+      "description": "Updated role of the organization member"
+    },
+    {
+      "id": "member_id",
+      "key": "member_id",
+      "value": "1",
+      "type": "string",
+      "description": "ID of the organization member"
+    },
+    {
+      "id": "credential_name",
+      "key": "credential_name",
+      "value": "Test Credential",
+      "type": "string",
+      "description": "Name of the test credential"
+    },
+    {
+      "id": "credential_type",
+      "key": "credential_type",
+      "value": "api",
+      "type": "string",
+      "description": "Type of the test credential"
+    },
+    {
+      "id": "credential_data",
+      "key": "credential_data",
+      "value": "{}",
+      "type": "string",
+      "description": "Data for the credential (JSON)"
+    },
+    {
+      "id": "credential_id",
+      "key": "credential_id",
+      "value": "1",
+      "type": "string",
+      "description": "ID of the credential"
+    },
+    {
+      "id": "updated_credential_name",
+      "key": "updated_credential_name",
+      "value": "Updated Credential",
+      "type": "string",
+      "description": "Updated name of the credential"
+    },
+    {
+      "id": "updated_credential_type",
+      "key": "updated_credential_type",
+      "value": "oauth2",
+      "type": "string",
+      "description": "Updated type of the credential"
+    },
+    {
+      "id": "updated_credential_data",
+      "key": "updated_credential_data",
+      "value": "{}",
+      "type": "string",
+      "description": "Updated data for the credential (JSON)"
+    },
+    {
+      "id": "workflow_name",
+      "key": "workflow_name",
+      "value": "Test Workflow",
+      "type": "string",
+      "description": "Name of the test workflow"
+    },
+    {
+      "id": "workflow_description",
+      "key": "workflow_description",
+      "value": "A test workflow for development",
+      "type": "string",
+      "description": "Description of the test workflow"
+    },
+    {
+      "id": "workflow_id",
+      "key": "workflow_id",
+      "value": "1",
+      "type": "string",
+      "description": "ID of the workflow"
+    },
+    {
+      "id": "updated_workflow_name",
+      "key": "updated_workflow_name",
+      "value": "Updated Workflow",
+      "type": "string",
+      "description": "Updated name of the workflow"
+    },
+    {
+      "id": "updated_workflow_description",
+      "key": "updated_workflow_description",
+      "value": "Updated description of the workflow",
+      "type": "string",
+      "description": "Updated description of the workflow"
+    },
+    {
+      "id": "execution_id",
+      "key": "execution_id",
+      "value": "1",
+      "type": "string",
+      "description": "ID of the execution"
+    },
+    {
+      "id": "execution_status",
+      "key": "execution_status",
+      "value": "completed",
+      "type": "string",
+      "description": "Status of the execution"
+    },
+    {
+      "id": "node_id",
+      "key": "node_id",
+      "value": "1",
+      "type": "string",
+      "description": "ID of the node"
+    }
+  ]
+}

@@ -3157,7 +3157,7 @@
     {
       "id": "base_url",
       "key": "base_url",
-      "value": "http://localhost:8000",
+      "value": "https://n8njds.test",
       "type": "string",
       "description": "Base URL of the API server"
     },

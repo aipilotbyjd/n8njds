@@ -38,9 +38,14 @@
             },
             "url": {
               "raw": "{{base_url}}/api/v1/register",
-              "protocol": "http",
-              "host": ["{{base_url}}"],
-              "path": ["api", "v1", "register"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "register"
+              ]
             }
           },
           "response": []
@@ -72,9 +77,14 @@
             },
             "url": {
               "raw": "{{base_url}}/api/v1/login",
-              "protocol": "http",
-              "host": ["{{base_url}}"],
-              "path": ["api", "v1", "login"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "login"
+              ]
             }
           },
           "response": []
@@ -97,9 +107,14 @@
             ],
             "url": {
               "raw": "{{base_url}}/api/v1/logout",
-              "protocol": "http",
-              "host": ["{{base_url}}"],
-              "path": ["api", "v1", "logout"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "logout"
+              ]
             }
           },
           "response": []
@@ -122,9 +137,14 @@
             ],
             "url": {
               "raw": "{{base_url}}/api/v1/user",
-              "protocol": "http",
-              "host": ["{{base_url}}"],
-              "path": ["api", "v1", "user"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "user"
+              ]
             }
           },
           "response": []
@@ -147,9 +167,14 @@
             ],
             "url": {
               "raw": "{{base_url}}/api/v1/profile",
-              "protocol": "http",
-              "host": ["{{base_url}}"],
-              "path": ["api", "v1", "profile"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "profile"
+              ]
             }
           },
           "response": []
@@ -172,9 +197,14 @@
             ],
             "url": {
               "raw": "{{base_url}}/api/v1/refresh",
-              "protocol": "http",
-              "host": ["{{base_url}}"],
-              "path": ["api", "v1", "refresh"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "refresh"
+              ]
             }
           },
           "response": []
@@ -206,9 +236,14 @@
             },
             "url": {
               "raw": "{{base_url}}/api/v1/forgot-password",
-              "protocol": "http",
-              "host": ["{{base_url}}"],
-              "path": ["api", "v1", "forgot-password"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "forgot-password"
+              ]
             }
           },
           "response": []
@@ -240,9 +275,14 @@
             },
             "url": {
               "raw": "{{base_url}}/api/v1/reset-password",
-              "protocol": "http",
-              "host": ["{{base_url}}"],
-              "path": ["api", "v1", "reset-password"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "reset-password"
+              ]
             }
           },
           "response": []
@@ -265,9 +305,15 @@
             ],
             "url": {
               "raw": "{{base_url}}/api/v1/email/verification-notification",
-              "protocol": "http",
-              "host": ["{{base_url}}"],
-              "path": ["api", "v1", "email", "verification-notification"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "email",
+                "verification-notification"
+              ]
             }
           },
           "response": []
@@ -296,9 +342,15 @@
             ],
             "url": {
               "raw": "{{base_url}}/api/v1/user/profile",
-              "protocol": "http",
-              "host": ["{{base_url}}"],
-              "path": ["api", "v1", "user", "profile"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "user",
+                "profile"
+              ]
             }
           },
           "response": []
@@ -335,9 +387,15 @@
             },
             "url": {
               "raw": "{{base_url}}/api/v1/user/profile",
-              "protocol": "http",
-              "host": ["{{base_url}}"],
-              "path": ["api", "v1", "user", "profile"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "user",
+                "profile"
+              ]
             }
           },
           "response": []
@@ -366,9 +424,14 @@
             ],
             "url": {
               "raw": "{{base_url}}/api/v1/organizations",
-              "protocol": "http",
-              "host": ["{{base_url}}"],
-              "path": ["api", "v1", "organizations"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "organizations"
+              ]
             }
           },
           "response": []
@@ -405,9 +468,14 @@
             },
             "url": {
               "raw": "{{base_url}}/api/v1/organizations",
-              "protocol": "http",
-              "host": ["{{base_url}}"],
-              "path": ["api", "v1", "organizations"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "organizations"
+              ]
             }
           },
           "response": []
@@ -430,9 +498,15 @@
             ],
             "url": {
               "raw": "{{base_url}}/api/v1/organizations/{{organization_id}}",
-              "protocol": "http",
-              "host": ["{{base_url}}"],
-              "path": ["api", "v1", "organizations", "{{organization_id}}"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "organizations",
+                "{{organization_id}}"
+              ]
             }
           },
           "response": []
@@ -469,9 +543,15 @@
             },
             "url": {
               "raw": "{{base_url}}/api/v1/organizations/{{organization_id}}",
-              "protocol": "http",
-              "host": ["{{base_url}}"],
-              "path": ["api", "v1", "organizations", "{{organization_id}}"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "organizations",
+                "{{organization_id}}"
+              ]
             }
           },
           "response": []
@@ -494,9 +574,15 @@
             ],
             "url": {
               "raw": "{{base_url}}/api/v1/organizations/{{organization_id}}",
-              "protocol": "http",
-              "host": ["{{base_url}}"],
-              "path": ["api", "v1", "organizations", "{{organization_id}}"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "organizations",
+                "{{organization_id}}"
+              ]
             }
           },
           "response": []
@@ -524,9 +610,16 @@
             ],
             "url": {
               "raw": "{{base_url}}/api/v1/organizations/{{organization_id}}/switch",
-              "protocol": "http",
-              "host": ["{{base_url}}"],
-              "path": ["api", "v1", "organizations", "{{organization_id}}", "switch"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "organizations",
+                "{{organization_id}}",
+                "switch"
+              ]
             }
           },
           "response": []
@@ -549,9 +642,16 @@
             ],
             "url": {
               "raw": "{{base_url}}/api/v1/organizations/{{organization_id}}/members",
-              "protocol": "http",
-              "host": ["{{base_url}}"],
-              "path": ["api", "v1", "organizations", "{{organization_id}}", "members"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "organizations",
+                "{{organization_id}}",
+                "members"
+              ]
             }
           },
           "response": []
@@ -588,9 +688,16 @@
             },
             "url": {
               "raw": "{{base_url}}/api/v1/organizations/{{organization_id}}/members",
-              "protocol": "http",
-              "host": ["{{base_url}}"],
-              "path": ["api", "v1", "organizations", "{{organization_id}}", "members"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "organizations",
+                "{{organization_id}}",
+                "members"
+              ]
             }
           },
           "response": []
@@ -613,9 +720,17 @@
             ],
             "url": {
               "raw": "{{base_url}}/api/v1/organizations/{{organization_id}}/members/{{member_id}}",
-              "protocol": "http",
-              "host": ["{{base_url}}"],
-              "path": ["api", "v1", "organizations", "{{organization_id}}", "members", "{{member_id}}"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "organizations",
+                "{{organization_id}}",
+                "members",
+                "{{member_id}}"
+              ]
             }
           },
           "response": []
@@ -652,9 +767,17 @@
             },
             "url": {
               "raw": "{{base_url}}/api/v1/organizations/{{organization_id}}/members/{{member_id}}",
-              "protocol": "http",
-              "host": ["{{base_url}}"],
-              "path": ["api", "v1", "organizations", "{{organization_id}}", "members", "{{member_id}}"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "organizations",
+                "{{organization_id}}",
+                "members",
+                "{{member_id}}"
+              ]
             }
           },
           "response": []
@@ -683,9 +806,14 @@
             ],
             "url": {
               "raw": "{{base_url}}/api/v1/credentials",
-              "protocol": "http",
-              "host": ["{{base_url}}"],
-              "path": ["api", "v1", "credentials"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "credentials"
+              ]
             }
           },
           "response": []
@@ -722,9 +850,14 @@
             },
             "url": {
               "raw": "{{base_url}}/api/v1/credentials",
-              "protocol": "http",
-              "host": ["{{base_url}}"],
-              "path": ["api", "v1", "credentials"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "credentials"
+              ]
             }
           },
           "response": []
@@ -747,9 +880,15 @@
             ],
             "url": {
               "raw": "{{base_url}}/api/v1/credentials/{{credential_id}}",
-              "protocol": "http",
-              "host": ["{{base_url}}"],
-              "path": ["api", "v1", "credentials", "{{credential_id}}"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "credentials",
+                "{{credential_id}}"
+              ]
             }
           },
           "response": []
@@ -786,9 +925,15 @@
             },
             "url": {
               "raw": "{{base_url}}/api/v1/credentials/{{credential_id}}",
-              "protocol": "http",
-              "host": ["{{base_url}}"],
-              "path": ["api", "v1", "credentials", "{{credential_id}}"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "credentials",
+                "{{credential_id}}"
+              ]
             }
           },
           "response": []
@@ -811,9 +956,15 @@
             ],
             "url": {
               "raw": "{{base_url}}/api/v1/credentials/{{credential_id}}",
-              "protocol": "http",
-              "host": ["{{base_url}}"],
-              "path": ["api", "v1", "credentials", "{{credential_id}}"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "credentials",
+                "{{credential_id}}"
+              ]
             }
           },
           "response": []
@@ -836,9 +987,16 @@
             ],
             "url": {
               "raw": "{{base_url}}/api/v1/credentials/{{credential_id}}/rotate",
-              "protocol": "http",
-              "host": ["{{base_url}}"],
-              "path": ["api", "v1", "credentials", "{{credential_id}}", "rotate"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "credentials",
+                "{{credential_id}}",
+                "rotate"
+              ]
             }
           },
           "response": []
@@ -867,9 +1025,14 @@
             ],
             "url": {
               "raw": "{{base_url}}/api/v1/workflows",
-              "protocol": "http",
-              "host": ["{{base_url}}"],
-              "path": ["api", "v1", "workflows"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "workflows"
+              ]
             }
           },
           "response": []
@@ -906,9 +1069,14 @@
             },
             "url": {
               "raw": "{{base_url}}/api/v1/workflows",
-              "protocol": "http",
-              "host": ["{{base_url}}"],
-              "path": ["api", "v1", "workflows"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "workflows"
+              ]
             }
           },
           "response": []
@@ -931,9 +1099,15 @@
             ],
             "url": {
               "raw": "{{base_url}}/api/v1/workflows/{{workflow_id}}",
-              "protocol": "http",
-              "host": ["{{base_url}}"],
-              "path": ["api", "v1", "workflows", "{{workflow_id}}"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "workflows",
+                "{{workflow_id}}"
+              ]
             }
           },
           "response": []
@@ -970,9 +1144,15 @@
             },
             "url": {
               "raw": "{{base_url}}/api/v1/workflows/{{workflow_id}}",
-              "protocol": "http",
-              "host": ["{{base_url}}"],
-              "path": ["api", "v1", "workflows", "{{workflow_id}}"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "workflows",
+                "{{workflow_id}}"
+              ]
             }
           },
           "response": []
@@ -995,9 +1175,15 @@
             ],
             "url": {
               "raw": "{{base_url}}/api/v1/workflows/{{workflow_id}}",
-              "protocol": "http",
-              "host": ["{{base_url}}"],
-              "path": ["api", "v1", "workflows", "{{workflow_id}}"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "workflows",
+                "{{workflow_id}}"
+              ]
             }
           },
           "response": []
@@ -1020,9 +1206,16 @@
             ],
             "url": {
               "raw": "{{base_url}}/api/v1/workflows/{{workflow_id}}/executions",
-              "protocol": "http",
-              "host": ["{{base_url}}"],
-              "path": ["api", "v1", "workflows", "{{workflow_id}}", "executions"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "workflows",
+                "{{workflow_id}}",
+                "executions"
+              ]
             }
           },
           "response": []
@@ -1059,9 +1252,16 @@
             },
             "url": {
               "raw": "{{base_url}}/api/v1/workflows/{{workflow_id}}/execute",
-              "protocol": "http",
-              "host": ["{{base_url}}"],
-              "path": ["api", "v1", "workflows", "{{workflow_id}}", "execute"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "workflows",
+                "{{workflow_id}}",
+                "execute"
+              ]
             }
           },
           "response": []
@@ -1084,9 +1284,16 @@
             ],
             "url": {
               "raw": "{{base_url}}/api/v1/workflows/{{workflow_id}}/nodes",
-              "protocol": "http",
-              "host": ["{{base_url}}"],
-              "path": ["api", "v1", "workflows", "{{workflow_id}}", "nodes"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "workflows",
+                "{{workflow_id}}",
+                "nodes"
+              ]
             }
           },
           "response": []
@@ -1115,9 +1322,14 @@
             ],
             "url": {
               "raw": "{{base_url}}/api/v1/executions",
-              "protocol": "http",
-              "host": ["{{base_url}}"],
-              "path": ["api", "v1", "executions"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "executions"
+              ]
             }
           },
           "response": []
@@ -1154,9 +1366,14 @@
             },
             "url": {
               "raw": "{{base_url}}/api/v1/executions",
-              "protocol": "http",
-              "host": ["{{base_url}}"],
-              "path": ["api", "v1", "executions"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "executions"
+              ]
             }
           },
           "response": []
@@ -1179,9 +1396,15 @@
             ],
             "url": {
               "raw": "{{base_url}}/api/v1/executions/{{execution_id}}",
-              "protocol": "http",
-              "host": ["{{base_url}}"],
-              "path": ["api", "v1", "executions", "{{execution_id}}"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "executions",
+                "{{execution_id}}"
+              ]
             }
           },
           "response": []
@@ -1218,9 +1441,15 @@
             },
             "url": {
               "raw": "{{base_url}}/api/v1/executions/{{execution_id}}",
-              "protocol": "http",
-              "host": ["{{base_url}}"],
-              "path": ["api", "v1", "executions", "{{execution_id}}"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "executions",
+                "{{execution_id}}"
+              ]
             }
           },
           "response": []
@@ -1243,9 +1472,15 @@
             ],
             "url": {
               "raw": "{{base_url}}/api/v1/executions/{{execution_id}}",
-              "protocol": "http",
-              "host": ["{{base_url}}"],
-              "path": ["api", "v1", "executions", "{{execution_id}}"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "executions",
+                "{{execution_id}}"
+              ]
             }
           },
           "response": []
@@ -1268,9 +1503,16 @@
             ],
             "url": {
               "raw": "{{base_url}}/api/v1/executions/{{execution_id}}/logs",
-              "protocol": "http",
-              "host": ["{{base_url}}"],
-              "path": ["api", "v1", "executions", "{{execution_id}}", "logs"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "executions",
+                "{{execution_id}}",
+                "logs"
+              ]
             }
           },
           "response": []
@@ -1299,9 +1541,14 @@
             ],
             "url": {
               "raw": "{{base_url}}/api/v1/nodes",
-              "protocol": "http",
-              "host": ["{{base_url}}"],
-              "path": ["api", "v1", "nodes"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "nodes"
+              ]
             }
           },
           "response": []
@@ -1324,9 +1571,16 @@
             ],
             "url": {
               "raw": "{{base_url}}/api/v1/nodes/{{node_id}}/config",
-              "protocol": "http",
-              "host": ["{{base_url}}"],
-              "path": ["api", "v1", "nodes", "{{node_id}}", "config"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "nodes",
+                "{{node_id}}",
+                "config"
+              ]
             }
           },
           "response": []
@@ -1355,9 +1609,15 @@
             ],
             "url": {
               "raw": "{{base_url}}/api/v1/admin/dashboard",
-              "protocol": "http",
-              "host": ["{{base_url}}"],
-              "path": ["api", "v1", "admin", "dashboard"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "dashboard"
+              ]
             }
           },
           "response": []
@@ -1380,9 +1640,15 @@
             ],
             "url": {
               "raw": "{{base_url}}/api/v1/admin/organizations",
-              "protocol": "http",
-              "host": ["{{base_url}}"],
-              "path": ["api", "v1", "admin", "organizations"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "organizations"
+              ]
             }
           },
           "response": []
@@ -1405,9 +1671,15 @@
             ],
             "url": {
               "raw": "{{base_url}}/api/v1/admin/users",
-              "protocol": "http",
-              "host": ["{{base_url}}"],
-              "path": ["api", "v1", "admin", "users"]
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "admin",
+                "users"
+              ]
             }
           },
           "response": []

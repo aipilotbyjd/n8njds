@@ -18,18 +18,19 @@ class User extends Authenticatable
     /**
      * The attributes that are mass assignable.
      *
-     * @var list<string>
+     * @var array<int, string>
      */
     protected $fillable = [
         'name',
         'email',
         'password',
+        'current_organization_id',
     ];
 
     /**
      * The attributes that should be hidden for serialization.
      *
-     * @var list<string>
+     * @var array<int, string>
      */
     protected $hidden = [
         'password',
@@ -85,22 +86,25 @@ class User extends Authenticatable
     }
 
     /**
-     * Send the password reset notification.
-     *
-     * @param  string  $token
-     * @return void
+     * Get the user's workflows.
      */
-    public function sendPasswordResetNotification($token)
+    public function workflows()
+    {
+        return $this->hasMany(\App\Models\Workflow::class, 'created_by', 'id');
+    }
+
+    /**
+     * Send the password reset notification.
+     */
+    public function sendPasswordResetNotification($token): void
     {
         $this->notify(new \App\Notifications\ApiPasswordResetNotification($token));
     }
 
     /**
      * Send the email verification notification.
-     *
-     * @return void
      */
-    public function sendEmailVerificationNotification()
+    public function sendEmailVerificationNotification(): void
     {
         $this->notify(new \Illuminate\Auth\Notifications\VerifyEmail);
     }

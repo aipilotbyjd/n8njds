@@ -1,0 +1,94 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: n8n-clone-app
+    container_name: n8n-clone-app
+    restart: unless-stopped
+    working_dir: /var/www/
+    environment:
+      - "DB_HOST=db"
+      - "DB_PORT=5432"
+      - "DB_DATABASE=${DB_DATABASE}"
+      - "DB_USERNAME=${DB_USERNAME}"
+      - "DB_PASSWORD=${DB_PASSWORD}"
+    volumes:
+      - ./:/var/www
+    networks:
+      - n8n-clone-network
+    depends_on:
+      - db
+      - redis
+      - queue
+
+  db:
+    image: postgres:15
+    container_name: n8n-clone-db
+    restart: unless-stopped
+    environment:
+      - "POSTGRES_DB=${DB_DATABASE}"
+      - "POSTGRES_USER=${DB_USERNAME}"
+      - "POSTGRES_PASSWORD=${DB_PASSWORD}"
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+    networks:
+      - n8n-clone-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: n8n-clone-redis
+    restart: unless-stopped
+    volumes:
+      - redisdata:/data
+    networks:
+      - n8n-clone-network
+
+  queue:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: n8n-clone-queue
+    container_name: n8n-clone-queue
+    restart: unless-stopped
+    working_dir: /var/www/
+    command: php artisan queue:work --tries=3
+    environment:
+      - "DB_HOST=db"
+      - "DB_PORT=5432"
+      - "DB_DATABASE=${DB_DATABASE}"
+      - "DB_USERNAME=${DB_USERNAME}"
+      - "DB_PASSWORD=${DB_PASSWORD}"
+      - "REDIS_HOST=redis"
+    volumes:
+      - ./:/var/www
+    networks:
+      - n8n-clone-network
+    depends_on:
+      - db
+      - redis
+
+  nginx:
+    image: nginx:alpine
+    container_name: n8n-clone-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx:/etc/nginx/conf.d
+    networks:
+      - n8n-clone-network
+    depends_on:
+      - app
+
+networks:
+  n8n-clone-network:
+    driver: bridge
+
+volumes:
+  dbdata:
+  redisdata:

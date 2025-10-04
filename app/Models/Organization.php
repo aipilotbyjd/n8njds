@@ -10,6 +10,16 @@ class Organization extends Model
     use HasFactory;
 
     /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'id';
+    }
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var array

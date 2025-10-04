@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Services\TenantService;
+use App\Domains\Billing\Services\TenantService;
 use Illuminate\Console\Command;
 
 class CreateTenantCommand extends Command

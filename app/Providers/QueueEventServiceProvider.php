@@ -3,7 +3,7 @@
 use Illuminate\Queue\Events\JobProcessed;
 use Illuminate\Queue\Events\JobProcessing;
 use Illuminate\Support\Facades\Queue;
-use App\Services\MonitoringService;
+use App\Domains\Billing\Services\MonitoringService;
 
 // Register queue job event listeners for monitoring
 Queue::before(function (JobProcessing $event) {

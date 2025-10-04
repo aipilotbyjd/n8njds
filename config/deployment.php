@@ -190,7 +190,7 @@ return [
                 ],
                 'custom_monitoring' => [
                     'enabled' => true,
-                    'class' => \App\Services\MonitoringService::class,
+                    'class' => \App\Domains\Billing\Services\MonitoringService::class,
                 ],
             ],
         ],

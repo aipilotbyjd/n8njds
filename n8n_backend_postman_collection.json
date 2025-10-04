@@ -48,7 +48,31 @@
               ]
             }
           },
-          "response": []
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "test-script",
+                "type": "text/javascript",
+                "exec": [
+                  "var responseJson = pm.response.json();",
+                  "if(responseJson.token) {",
+                  "    pm.environment.set(\"access_token\", responseJson.token);",
+                  "    console.log(\"Token set in environment variable: \" + responseJson.token);",
+                  "}",
+                  "",
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Response is JSON\", function () {",
+                  "    pm.response.to.be.json;",
+                  "});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Login User",
@@ -87,7 +111,31 @@
               ]
             }
           },
-          "response": []
+          "response": [],
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "id": "test-script",
+                "type": "text/javascript",
+                "exec": [
+                  "var responseJson = pm.response.json();",
+                  "if(responseJson.token) {",
+                  "    pm.environment.set(\"access_token\", responseJson.token);",
+                  "    console.log(\"Token set in environment variable: \" + responseJson.token);",
+                  "}",
+                  "",
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Response is JSON\", function () {",
+                  "    pm.response.to.be.json;",
+                  "});"
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Logout User",
@@ -117,7 +165,23 @@
               ]
             }
           },
-          "response": []
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "pre-request-script",
+                "type": "text/javascript",
+                "exec": [
+                  "// Ensure access token is set for protected endpoints",
+                  "if (!pm.environment.get(\"access_token\")) {",
+                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "}",
+                  ""
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Get User Profile",
@@ -147,7 +211,23 @@
               ]
             }
           },
-          "response": []
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "pre-request-script",
+                "type": "text/javascript",
+                "exec": [
+                  "// Ensure access token is set for protected endpoints",
+                  "if (!pm.environment.get(\"access_token\")) {",
+                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "}",
+                  ""
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Get Profile (Alternative)",
@@ -177,7 +257,23 @@
               ]
             }
           },
-          "response": []
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "pre-request-script",
+                "type": "text/javascript",
+                "exec": [
+                  "// Ensure access token is set for protected endpoints",
+                  "if (!pm.environment.get(\"access_token\")) {",
+                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "}",
+                  ""
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Refresh Token",
@@ -207,7 +303,23 @@
               ]
             }
           },
-          "response": []
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "pre-request-script",
+                "type": "text/javascript",
+                "exec": [
+                  "// Ensure access token is set for protected endpoints",
+                  "if (!pm.environment.get(\"access_token\")) {",
+                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "}",
+                  ""
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Forgot Password",
@@ -316,7 +428,23 @@
               ]
             }
           },
-          "response": []
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "pre-request-script",
+                "type": "text/javascript",
+                "exec": [
+                  "// Ensure access token is set for protected endpoints",
+                  "if (!pm.environment.get(\"access_token\")) {",
+                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "}",
+                  ""
+                ]
+              }
+            }
+          ]
         }
       ]
     },
@@ -353,7 +481,23 @@
               ]
             }
           },
-          "response": []
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "pre-request-script",
+                "type": "text/javascript",
+                "exec": [
+                  "// Ensure access token is set for protected endpoints",
+                  "if (!pm.environment.get(\"access_token\")) {",
+                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "}",
+                  ""
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Update User Profile",
@@ -398,7 +542,23 @@
               ]
             }
           },
-          "response": []
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "pre-request-script",
+                "type": "text/javascript",
+                "exec": [
+                  "// Ensure access token is set for protected endpoints",
+                  "if (!pm.environment.get(\"access_token\")) {",
+                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "}",
+                  ""
+                ]
+              }
+            }
+          ]
         }
       ]
     },
@@ -434,7 +594,23 @@
               ]
             }
           },
-          "response": []
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "pre-request-script",
+                "type": "text/javascript",
+                "exec": [
+                  "// Ensure access token is set for protected endpoints",
+                  "if (!pm.environment.get(\"access_token\")) {",
+                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "}",
+                  ""
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Create Organization",
@@ -478,7 +654,23 @@
               ]
             }
           },
-          "response": []
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "pre-request-script",
+                "type": "text/javascript",
+                "exec": [
+                  "// Ensure access token is set for protected endpoints",
+                  "if (!pm.environment.get(\"access_token\")) {",
+                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "}",
+                  ""
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Get Organization",
@@ -509,7 +701,23 @@
               ]
             }
           },
-          "response": []
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "pre-request-script",
+                "type": "text/javascript",
+                "exec": [
+                  "// Ensure access token is set for protected endpoints",
+                  "if (!pm.environment.get(\"access_token\")) {",
+                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "}",
+                  ""
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Update Organization",
@@ -554,7 +762,23 @@
               ]
             }
           },
-          "response": []
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "pre-request-script",
+                "type": "text/javascript",
+                "exec": [
+                  "// Ensure access token is set for protected endpoints",
+                  "if (!pm.environment.get(\"access_token\")) {",
+                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "}",
+                  ""
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Delete Organization",
@@ -585,7 +809,23 @@
               ]
             }
           },
-          "response": []
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "pre-request-script",
+                "type": "text/javascript",
+                "exec": [
+                  "// Ensure access token is set for protected endpoints",
+                  "if (!pm.environment.get(\"access_token\")) {",
+                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "}",
+                  ""
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Switch to Organization",
@@ -622,7 +862,23 @@
               ]
             }
           },
-          "response": []
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "pre-request-script",
+                "type": "text/javascript",
+                "exec": [
+                  "// Ensure access token is set for protected endpoints",
+                  "if (!pm.environment.get(\"access_token\")) {",
+                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "}",
+                  ""
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Get Organization Members",
@@ -654,7 +910,23 @@
               ]
             }
           },
-          "response": []
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "pre-request-script",
+                "type": "text/javascript",
+                "exec": [
+                  "// Ensure access token is set for protected endpoints",
+                  "if (!pm.environment.get(\"access_token\")) {",
+                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "}",
+                  ""
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Add Organization Member",
@@ -700,7 +972,23 @@
               ]
             }
           },
-          "response": []
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "pre-request-script",
+                "type": "text/javascript",
+                "exec": [
+                  "// Ensure access token is set for protected endpoints",
+                  "if (!pm.environment.get(\"access_token\")) {",
+                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "}",
+                  ""
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Remove Organization Member",
@@ -733,7 +1021,23 @@
               ]
             }
           },
-          "response": []
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "pre-request-script",
+                "type": "text/javascript",
+                "exec": [
+                  "// Ensure access token is set for protected endpoints",
+                  "if (!pm.environment.get(\"access_token\")) {",
+                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "}",
+                  ""
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Update Organization Member",
@@ -780,7 +1084,23 @@
               ]
             }
           },
-          "response": []
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "pre-request-script",
+                "type": "text/javascript",
+                "exec": [
+                  "// Ensure access token is set for protected endpoints",
+                  "if (!pm.environment.get(\"access_token\")) {",
+                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "}",
+                  ""
+                ]
+              }
+            }
+          ]
         }
       ]
     },
@@ -816,7 +1136,23 @@
               ]
             }
           },
-          "response": []
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "pre-request-script",
+                "type": "text/javascript",
+                "exec": [
+                  "// Ensure access token is set for protected endpoints",
+                  "if (!pm.environment.get(\"access_token\")) {",
+                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "}",
+                  ""
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Create Credential",
@@ -860,7 +1196,23 @@
               ]
             }
           },
-          "response": []
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "pre-request-script",
+                "type": "text/javascript",
+                "exec": [
+                  "// Ensure access token is set for protected endpoints",
+                  "if (!pm.environment.get(\"access_token\")) {",
+                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "}",
+                  ""
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Get Credential",
@@ -891,7 +1243,23 @@
               ]
             }
           },
-          "response": []
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "pre-request-script",
+                "type": "text/javascript",
+                "exec": [
+                  "// Ensure access token is set for protected endpoints",
+                  "if (!pm.environment.get(\"access_token\")) {",
+                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "}",
+                  ""
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Update Credential",
@@ -936,7 +1304,23 @@
               ]
             }
           },
-          "response": []
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "pre-request-script",
+                "type": "text/javascript",
+                "exec": [
+                  "// Ensure access token is set for protected endpoints",
+                  "if (!pm.environment.get(\"access_token\")) {",
+                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "}",
+                  ""
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Delete Credential",
@@ -967,7 +1351,23 @@
               ]
             }
           },
-          "response": []
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "pre-request-script",
+                "type": "text/javascript",
+                "exec": [
+                  "// Ensure access token is set for protected endpoints",
+                  "if (!pm.environment.get(\"access_token\")) {",
+                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "}",
+                  ""
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Rotate Credential",
@@ -999,7 +1399,23 @@
               ]
             }
           },
-          "response": []
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "pre-request-script",
+                "type": "text/javascript",
+                "exec": [
+                  "// Ensure access token is set for protected endpoints",
+                  "if (!pm.environment.get(\"access_token\")) {",
+                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "}",
+                  ""
+                ]
+              }
+            }
+          ]
         }
       ]
     },
@@ -1035,7 +1451,23 @@
               ]
             }
           },
-          "response": []
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "pre-request-script",
+                "type": "text/javascript",
+                "exec": [
+                  "// Ensure access token is set for protected endpoints",
+                  "if (!pm.environment.get(\"access_token\")) {",
+                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "}",
+                  ""
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Create Workflow",
@@ -1079,7 +1511,23 @@
               ]
             }
           },
-          "response": []
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "pre-request-script",
+                "type": "text/javascript",
+                "exec": [
+                  "// Ensure access token is set for protected endpoints",
+                  "if (!pm.environment.get(\"access_token\")) {",
+                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "}",
+                  ""
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Get Workflow",
@@ -1110,7 +1558,23 @@
               ]
             }
           },
-          "response": []
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "pre-request-script",
+                "type": "text/javascript",
+                "exec": [
+                  "// Ensure access token is set for protected endpoints",
+                  "if (!pm.environment.get(\"access_token\")) {",
+                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "}",
+                  ""
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Update Workflow",
@@ -1155,7 +1619,23 @@
               ]
             }
           },
-          "response": []
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "pre-request-script",
+                "type": "text/javascript",
+                "exec": [
+                  "// Ensure access token is set for protected endpoints",
+                  "if (!pm.environment.get(\"access_token\")) {",
+                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "}",
+                  ""
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Delete Workflow",
@@ -1186,7 +1666,23 @@
               ]
             }
           },
-          "response": []
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "pre-request-script",
+                "type": "text/javascript",
+                "exec": [
+                  "// Ensure access token is set for protected endpoints",
+                  "if (!pm.environment.get(\"access_token\")) {",
+                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "}",
+                  ""
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Get Workflow Executions",
@@ -1218,7 +1714,23 @@
               ]
             }
           },
-          "response": []
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "pre-request-script",
+                "type": "text/javascript",
+                "exec": [
+                  "// Ensure access token is set for protected endpoints",
+                  "if (!pm.environment.get(\"access_token\")) {",
+                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "}",
+                  ""
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Execute Workflow",
@@ -1264,7 +1776,23 @@
               ]
             }
           },
-          "response": []
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "pre-request-script",
+                "type": "text/javascript",
+                "exec": [
+                  "// Ensure access token is set for protected endpoints",
+                  "if (!pm.environment.get(\"access_token\")) {",
+                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "}",
+                  ""
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Get Workflow Nodes",
@@ -1296,7 +1824,23 @@
               ]
             }
           },
-          "response": []
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "pre-request-script",
+                "type": "text/javascript",
+                "exec": [
+                  "// Ensure access token is set for protected endpoints",
+                  "if (!pm.environment.get(\"access_token\")) {",
+                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "}",
+                  ""
+                ]
+              }
+            }
+          ]
         }
       ]
     },
@@ -1332,7 +1876,23 @@
               ]
             }
           },
-          "response": []
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "pre-request-script",
+                "type": "text/javascript",
+                "exec": [
+                  "// Ensure access token is set for protected endpoints",
+                  "if (!pm.environment.get(\"access_token\")) {",
+                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "}",
+                  ""
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Create Execution",
@@ -1376,7 +1936,23 @@
               ]
             }
           },
-          "response": []
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "pre-request-script",
+                "type": "text/javascript",
+                "exec": [
+                  "// Ensure access token is set for protected endpoints",
+                  "if (!pm.environment.get(\"access_token\")) {",
+                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "}",
+                  ""
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Get Execution",
@@ -1407,7 +1983,23 @@
               ]
             }
           },
-          "response": []
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "pre-request-script",
+                "type": "text/javascript",
+                "exec": [
+                  "// Ensure access token is set for protected endpoints",
+                  "if (!pm.environment.get(\"access_token\")) {",
+                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "}",
+                  ""
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Update Execution",
@@ -1452,7 +2044,23 @@
               ]
             }
           },
-          "response": []
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "pre-request-script",
+                "type": "text/javascript",
+                "exec": [
+                  "// Ensure access token is set for protected endpoints",
+                  "if (!pm.environment.get(\"access_token\")) {",
+                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "}",
+                  ""
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Delete Execution",
@@ -1483,7 +2091,23 @@
               ]
             }
           },
-          "response": []
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "pre-request-script",
+                "type": "text/javascript",
+                "exec": [
+                  "// Ensure access token is set for protected endpoints",
+                  "if (!pm.environment.get(\"access_token\")) {",
+                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "}",
+                  ""
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Get Execution Logs",
@@ -1515,7 +2139,23 @@
               ]
             }
           },
-          "response": []
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "pre-request-script",
+                "type": "text/javascript",
+                "exec": [
+                  "// Ensure access token is set for protected endpoints",
+                  "if (!pm.environment.get(\"access_token\")) {",
+                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "}",
+                  ""
+                ]
+              }
+            }
+          ]
         }
       ]
     },
@@ -1551,7 +2191,23 @@
               ]
             }
           },
-          "response": []
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "pre-request-script",
+                "type": "text/javascript",
+                "exec": [
+                  "// Ensure access token is set for protected endpoints",
+                  "if (!pm.environment.get(\"access_token\")) {",
+                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "}",
+                  ""
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Get Node Config",
@@ -1583,7 +2239,23 @@
               ]
             }
           },
-          "response": []
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "pre-request-script",
+                "type": "text/javascript",
+                "exec": [
+                  "// Ensure access token is set for protected endpoints",
+                  "if (!pm.environment.get(\"access_token\")) {",
+                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "}",
+                  ""
+                ]
+              }
+            }
+          ]
         }
       ]
     },
@@ -1620,7 +2292,23 @@
               ]
             }
           },
-          "response": []
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "pre-request-script",
+                "type": "text/javascript",
+                "exec": [
+                  "// Ensure access token is set for protected endpoints",
+                  "if (!pm.environment.get(\"access_token\")) {",
+                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "}",
+                  ""
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Get Admin Organizations",
@@ -1651,7 +2339,23 @@
               ]
             }
           },
-          "response": []
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "pre-request-script",
+                "type": "text/javascript",
+                "exec": [
+                  "// Ensure access token is set for protected endpoints",
+                  "if (!pm.environment.get(\"access_token\")) {",
+                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "}",
+                  ""
+                ]
+              }
+            }
+          ]
         },
         {
           "name": "Get Admin Users",
@@ -1682,7 +2386,23 @@
               ]
             }
           },
-          "response": []
+          "response": [],
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "id": "pre-request-script",
+                "type": "text/javascript",
+                "exec": [
+                  "// Ensure access token is set for protected endpoints",
+                  "if (!pm.environment.get(\"access_token\")) {",
+                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "}",
+                  ""
+                ]
+              }
+            }
+          ]
         }
       ]
     }

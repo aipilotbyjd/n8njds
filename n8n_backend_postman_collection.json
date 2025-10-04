@@ -189,14 +189,15 @@
             "method": "GET",
             "header": [
               {
-                "key": "Authorization",
-                "value": "Bearer {{access_token}}",
-                "type": "text"
-              },
-              {
                 "key": "Accept",
                 "value": "application/json",
                 "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text",
+                "disabled": false
               }
             ],
             "url": {
@@ -216,12 +217,30 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "pre-request-script",
+                "id": "auth-pre-request",
                 "type": "text/javascript",
                 "exec": [
                   "// Ensure access token is set for protected endpoints",
                   "if (!pm.environment.get(\"access_token\")) {",
-                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "    console.log(\"Warning: No access_token found in environment. Please login/register first.\");",
+                  "    console.log(\"Request may fail due to missing authentication.\");",
+                  "}",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "auth-test",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Request completed with expected status\", function () {",
+                  "    pm.response.to.be.oneOf([200, 201, 204, 401, 403, 422]);",
+                  "});",
+                  "",
+                  "if (pm.response.code === 401) {",
+                  "    console.log(\"Unauthorized - token may have expired. Please re-authenticate.\");",
                   "}",
                   ""
                 ]
@@ -458,14 +477,15 @@
             "method": "GET",
             "header": [
               {
-                "key": "Authorization",
-                "value": "Bearer {{access_token}}",
-                "type": "text"
-              },
-              {
                 "key": "Accept",
                 "value": "application/json",
                 "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text",
+                "disabled": false
               }
             ],
             "url": {
@@ -486,12 +506,30 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "pre-request-script",
+                "id": "auth-pre-request",
                 "type": "text/javascript",
                 "exec": [
                   "// Ensure access token is set for protected endpoints",
                   "if (!pm.environment.get(\"access_token\")) {",
-                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "    console.log(\"Warning: No access_token found in environment. Please login/register first.\");",
+                  "    console.log(\"Request may fail due to missing authentication.\");",
+                  "}",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "auth-test",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Request completed with expected status\", function () {",
+                  "    pm.response.to.be.oneOf([200, 201, 204, 401, 403, 422]);",
+                  "});",
+                  "",
+                  "if (pm.response.code === 401) {",
+                  "    console.log(\"Unauthorized - token may have expired. Please re-authenticate.\");",
                   "}",
                   ""
                 ]
@@ -505,11 +543,6 @@
             "method": "PUT",
             "header": [
               {
-                "key": "Authorization",
-                "value": "Bearer {{access_token}}",
-                "type": "text"
-              },
-              {
                 "key": "Content-Type",
                 "value": "application/json",
                 "type": "text"
@@ -518,6 +551,12 @@
                 "key": "Accept",
                 "value": "application/json",
                 "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text",
+                "disabled": false
               }
             ],
             "body": {
@@ -547,12 +586,30 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "pre-request-script",
+                "id": "auth-pre-request",
                 "type": "text/javascript",
                 "exec": [
                   "// Ensure access token is set for protected endpoints",
                   "if (!pm.environment.get(\"access_token\")) {",
-                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "    console.log(\"Warning: No access_token found in environment. Please login/register first.\");",
+                  "    console.log(\"Request may fail due to missing authentication.\");",
+                  "}",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "auth-test",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Request completed with expected status\", function () {",
+                  "    pm.response.to.be.oneOf([200, 201, 204, 401, 403, 422]);",
+                  "});",
+                  "",
+                  "if (pm.response.code === 401) {",
+                  "    console.log(\"Unauthorized - token may have expired. Please re-authenticate.\");",
                   "}",
                   ""
                 ]
@@ -572,14 +629,15 @@
             "method": "GET",
             "header": [
               {
-                "key": "Authorization",
-                "value": "Bearer {{access_token}}",
-                "type": "text"
-              },
-              {
                 "key": "Accept",
                 "value": "application/json",
                 "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text",
+                "disabled": false
               }
             ],
             "url": {
@@ -599,12 +657,30 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "pre-request-script",
+                "id": "auth-pre-request",
                 "type": "text/javascript",
                 "exec": [
                   "// Ensure access token is set for protected endpoints",
                   "if (!pm.environment.get(\"access_token\")) {",
-                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "    console.log(\"Warning: No access_token found in environment. Please login/register first.\");",
+                  "    console.log(\"Request may fail due to missing authentication.\");",
+                  "}",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "auth-test",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Request completed with expected status\", function () {",
+                  "    pm.response.to.be.oneOf([200, 201, 204, 401, 403, 422]);",
+                  "});",
+                  "",
+                  "if (pm.response.code === 401) {",
+                  "    console.log(\"Unauthorized - token may have expired. Please re-authenticate.\");",
                   "}",
                   ""
                 ]
@@ -618,11 +694,6 @@
             "method": "POST",
             "header": [
               {
-                "key": "Authorization",
-                "value": "Bearer {{access_token}}",
-                "type": "text"
-              },
-              {
                 "key": "Content-Type",
                 "value": "application/json",
                 "type": "text"
@@ -631,6 +702,12 @@
                 "key": "Accept",
                 "value": "application/json",
                 "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text",
+                "disabled": false
               }
             ],
             "body": {
@@ -659,12 +736,30 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "pre-request-script",
+                "id": "auth-pre-request",
                 "type": "text/javascript",
                 "exec": [
                   "// Ensure access token is set for protected endpoints",
                   "if (!pm.environment.get(\"access_token\")) {",
-                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "    console.log(\"Warning: No access_token found in environment. Please login/register first.\");",
+                  "    console.log(\"Request may fail due to missing authentication.\");",
+                  "}",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "auth-test",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Request completed with expected status\", function () {",
+                  "    pm.response.to.be.oneOf([200, 201, 204, 401, 403, 422]);",
+                  "});",
+                  "",
+                  "if (pm.response.code === 401) {",
+                  "    console.log(\"Unauthorized - token may have expired. Please re-authenticate.\");",
                   "}",
                   ""
                 ]
@@ -678,14 +773,15 @@
             "method": "GET",
             "header": [
               {
-                "key": "Authorization",
-                "value": "Bearer {{access_token}}",
-                "type": "text"
-              },
-              {
                 "key": "Accept",
                 "value": "application/json",
                 "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text",
+                "disabled": false
               }
             ],
             "url": {
@@ -706,12 +802,30 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "pre-request-script",
+                "id": "auth-pre-request",
                 "type": "text/javascript",
                 "exec": [
                   "// Ensure access token is set for protected endpoints",
                   "if (!pm.environment.get(\"access_token\")) {",
-                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "    console.log(\"Warning: No access_token found in environment. Please login/register first.\");",
+                  "    console.log(\"Request may fail due to missing authentication.\");",
+                  "}",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "auth-test",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Request completed with expected status\", function () {",
+                  "    pm.response.to.be.oneOf([200, 201, 204, 401, 403, 422]);",
+                  "});",
+                  "",
+                  "if (pm.response.code === 401) {",
+                  "    console.log(\"Unauthorized - token may have expired. Please re-authenticate.\");",
                   "}",
                   ""
                 ]
@@ -725,11 +839,6 @@
             "method": "PUT",
             "header": [
               {
-                "key": "Authorization",
-                "value": "Bearer {{access_token}}",
-                "type": "text"
-              },
-              {
                 "key": "Content-Type",
                 "value": "application/json",
                 "type": "text"
@@ -738,6 +847,12 @@
                 "key": "Accept",
                 "value": "application/json",
                 "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text",
+                "disabled": false
               }
             ],
             "body": {
@@ -767,12 +882,30 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "pre-request-script",
+                "id": "auth-pre-request",
                 "type": "text/javascript",
                 "exec": [
                   "// Ensure access token is set for protected endpoints",
                   "if (!pm.environment.get(\"access_token\")) {",
-                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "    console.log(\"Warning: No access_token found in environment. Please login/register first.\");",
+                  "    console.log(\"Request may fail due to missing authentication.\");",
+                  "}",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "auth-test",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Request completed with expected status\", function () {",
+                  "    pm.response.to.be.oneOf([200, 201, 204, 401, 403, 422]);",
+                  "});",
+                  "",
+                  "if (pm.response.code === 401) {",
+                  "    console.log(\"Unauthorized - token may have expired. Please re-authenticate.\");",
                   "}",
                   ""
                 ]
@@ -786,14 +919,15 @@
             "method": "DELETE",
             "header": [
               {
-                "key": "Authorization",
-                "value": "Bearer {{access_token}}",
-                "type": "text"
-              },
-              {
                 "key": "Accept",
                 "value": "application/json",
                 "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text",
+                "disabled": false
               }
             ],
             "url": {
@@ -814,12 +948,30 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "pre-request-script",
+                "id": "auth-pre-request",
                 "type": "text/javascript",
                 "exec": [
                   "// Ensure access token is set for protected endpoints",
                   "if (!pm.environment.get(\"access_token\")) {",
-                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "    console.log(\"Warning: No access_token found in environment. Please login/register first.\");",
+                  "    console.log(\"Request may fail due to missing authentication.\");",
+                  "}",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "auth-test",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Request completed with expected status\", function () {",
+                  "    pm.response.to.be.oneOf([200, 201, 204, 401, 403, 422]);",
+                  "});",
+                  "",
+                  "if (pm.response.code === 401) {",
+                  "    console.log(\"Unauthorized - token may have expired. Please re-authenticate.\");",
                   "}",
                   ""
                 ]
@@ -833,11 +985,6 @@
             "method": "POST",
             "header": [
               {
-                "key": "Authorization",
-                "value": "Bearer {{access_token}}",
-                "type": "text"
-              },
-              {
                 "key": "Content-Type",
                 "value": "application/json",
                 "type": "text"
@@ -846,6 +993,12 @@
                 "key": "Accept",
                 "value": "application/json",
                 "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text",
+                "disabled": false
               }
             ],
             "url": {
@@ -867,12 +1020,30 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "pre-request-script",
+                "id": "auth-pre-request",
                 "type": "text/javascript",
                 "exec": [
                   "// Ensure access token is set for protected endpoints",
                   "if (!pm.environment.get(\"access_token\")) {",
-                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "    console.log(\"Warning: No access_token found in environment. Please login/register first.\");",
+                  "    console.log(\"Request may fail due to missing authentication.\");",
+                  "}",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "auth-test",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Request completed with expected status\", function () {",
+                  "    pm.response.to.be.oneOf([200, 201, 204, 401, 403, 422]);",
+                  "});",
+                  "",
+                  "if (pm.response.code === 401) {",
+                  "    console.log(\"Unauthorized - token may have expired. Please re-authenticate.\");",
                   "}",
                   ""
                 ]
@@ -886,14 +1057,15 @@
             "method": "GET",
             "header": [
               {
-                "key": "Authorization",
-                "value": "Bearer {{access_token}}",
-                "type": "text"
-              },
-              {
                 "key": "Accept",
                 "value": "application/json",
                 "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text",
+                "disabled": false
               }
             ],
             "url": {
@@ -915,12 +1087,30 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "pre-request-script",
+                "id": "auth-pre-request",
                 "type": "text/javascript",
                 "exec": [
                   "// Ensure access token is set for protected endpoints",
                   "if (!pm.environment.get(\"access_token\")) {",
-                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "    console.log(\"Warning: No access_token found in environment. Please login/register first.\");",
+                  "    console.log(\"Request may fail due to missing authentication.\");",
+                  "}",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "auth-test",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Request completed with expected status\", function () {",
+                  "    pm.response.to.be.oneOf([200, 201, 204, 401, 403, 422]);",
+                  "});",
+                  "",
+                  "if (pm.response.code === 401) {",
+                  "    console.log(\"Unauthorized - token may have expired. Please re-authenticate.\");",
                   "}",
                   ""
                 ]
@@ -934,11 +1124,6 @@
             "method": "POST",
             "header": [
               {
-                "key": "Authorization",
-                "value": "Bearer {{access_token}}",
-                "type": "text"
-              },
-              {
                 "key": "Content-Type",
                 "value": "application/json",
                 "type": "text"
@@ -947,6 +1132,12 @@
                 "key": "Accept",
                 "value": "application/json",
                 "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text",
+                "disabled": false
               }
             ],
             "body": {
@@ -977,12 +1168,30 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "pre-request-script",
+                "id": "auth-pre-request",
                 "type": "text/javascript",
                 "exec": [
                   "// Ensure access token is set for protected endpoints",
                   "if (!pm.environment.get(\"access_token\")) {",
-                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "    console.log(\"Warning: No access_token found in environment. Please login/register first.\");",
+                  "    console.log(\"Request may fail due to missing authentication.\");",
+                  "}",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "auth-test",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Request completed with expected status\", function () {",
+                  "    pm.response.to.be.oneOf([200, 201, 204, 401, 403, 422]);",
+                  "});",
+                  "",
+                  "if (pm.response.code === 401) {",
+                  "    console.log(\"Unauthorized - token may have expired. Please re-authenticate.\");",
                   "}",
                   ""
                 ]
@@ -996,14 +1205,15 @@
             "method": "DELETE",
             "header": [
               {
-                "key": "Authorization",
-                "value": "Bearer {{access_token}}",
-                "type": "text"
-              },
-              {
                 "key": "Accept",
                 "value": "application/json",
                 "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text",
+                "disabled": false
               }
             ],
             "url": {
@@ -1026,12 +1236,30 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "pre-request-script",
+                "id": "auth-pre-request",
                 "type": "text/javascript",
                 "exec": [
                   "// Ensure access token is set for protected endpoints",
                   "if (!pm.environment.get(\"access_token\")) {",
-                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "    console.log(\"Warning: No access_token found in environment. Please login/register first.\");",
+                  "    console.log(\"Request may fail due to missing authentication.\");",
+                  "}",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "auth-test",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Request completed with expected status\", function () {",
+                  "    pm.response.to.be.oneOf([200, 201, 204, 401, 403, 422]);",
+                  "});",
+                  "",
+                  "if (pm.response.code === 401) {",
+                  "    console.log(\"Unauthorized - token may have expired. Please re-authenticate.\");",
                   "}",
                   ""
                 ]
@@ -1045,11 +1273,6 @@
             "method": "PUT",
             "header": [
               {
-                "key": "Authorization",
-                "value": "Bearer {{access_token}}",
-                "type": "text"
-              },
-              {
                 "key": "Content-Type",
                 "value": "application/json",
                 "type": "text"
@@ -1058,6 +1281,12 @@
                 "key": "Accept",
                 "value": "application/json",
                 "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text",
+                "disabled": false
               }
             ],
             "body": {
@@ -1089,12 +1318,30 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "pre-request-script",
+                "id": "auth-pre-request",
                 "type": "text/javascript",
                 "exec": [
                   "// Ensure access token is set for protected endpoints",
                   "if (!pm.environment.get(\"access_token\")) {",
-                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "    console.log(\"Warning: No access_token found in environment. Please login/register first.\");",
+                  "    console.log(\"Request may fail due to missing authentication.\");",
+                  "}",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "auth-test",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Request completed with expected status\", function () {",
+                  "    pm.response.to.be.oneOf([200, 201, 204, 401, 403, 422]);",
+                  "});",
+                  "",
+                  "if (pm.response.code === 401) {",
+                  "    console.log(\"Unauthorized - token may have expired. Please re-authenticate.\");",
                   "}",
                   ""
                 ]
@@ -1114,14 +1361,15 @@
             "method": "GET",
             "header": [
               {
-                "key": "Authorization",
-                "value": "Bearer {{access_token}}",
-                "type": "text"
-              },
-              {
                 "key": "Accept",
                 "value": "application/json",
                 "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text",
+                "disabled": false
               }
             ],
             "url": {
@@ -1141,12 +1389,30 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "pre-request-script",
+                "id": "auth-pre-request",
                 "type": "text/javascript",
                 "exec": [
                   "// Ensure access token is set for protected endpoints",
                   "if (!pm.environment.get(\"access_token\")) {",
-                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "    console.log(\"Warning: No access_token found in environment. Please login/register first.\");",
+                  "    console.log(\"Request may fail due to missing authentication.\");",
+                  "}",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "auth-test",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Request completed with expected status\", function () {",
+                  "    pm.response.to.be.oneOf([200, 201, 204, 401, 403, 422]);",
+                  "});",
+                  "",
+                  "if (pm.response.code === 401) {",
+                  "    console.log(\"Unauthorized - token may have expired. Please re-authenticate.\");",
                   "}",
                   ""
                 ]
@@ -1160,11 +1426,6 @@
             "method": "POST",
             "header": [
               {
-                "key": "Authorization",
-                "value": "Bearer {{access_token}}",
-                "type": "text"
-              },
-              {
                 "key": "Content-Type",
                 "value": "application/json",
                 "type": "text"
@@ -1173,6 +1434,12 @@
                 "key": "Accept",
                 "value": "application/json",
                 "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text",
+                "disabled": false
               }
             ],
             "body": {
@@ -1201,12 +1468,30 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "pre-request-script",
+                "id": "auth-pre-request",
                 "type": "text/javascript",
                 "exec": [
                   "// Ensure access token is set for protected endpoints",
                   "if (!pm.environment.get(\"access_token\")) {",
-                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "    console.log(\"Warning: No access_token found in environment. Please login/register first.\");",
+                  "    console.log(\"Request may fail due to missing authentication.\");",
+                  "}",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "auth-test",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Request completed with expected status\", function () {",
+                  "    pm.response.to.be.oneOf([200, 201, 204, 401, 403, 422]);",
+                  "});",
+                  "",
+                  "if (pm.response.code === 401) {",
+                  "    console.log(\"Unauthorized - token may have expired. Please re-authenticate.\");",
                   "}",
                   ""
                 ]
@@ -1220,14 +1505,15 @@
             "method": "GET",
             "header": [
               {
-                "key": "Authorization",
-                "value": "Bearer {{access_token}}",
-                "type": "text"
-              },
-              {
                 "key": "Accept",
                 "value": "application/json",
                 "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text",
+                "disabled": false
               }
             ],
             "url": {
@@ -1248,12 +1534,30 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "pre-request-script",
+                "id": "auth-pre-request",
                 "type": "text/javascript",
                 "exec": [
                   "// Ensure access token is set for protected endpoints",
                   "if (!pm.environment.get(\"access_token\")) {",
-                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "    console.log(\"Warning: No access_token found in environment. Please login/register first.\");",
+                  "    console.log(\"Request may fail due to missing authentication.\");",
+                  "}",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "auth-test",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Request completed with expected status\", function () {",
+                  "    pm.response.to.be.oneOf([200, 201, 204, 401, 403, 422]);",
+                  "});",
+                  "",
+                  "if (pm.response.code === 401) {",
+                  "    console.log(\"Unauthorized - token may have expired. Please re-authenticate.\");",
                   "}",
                   ""
                 ]
@@ -1267,11 +1571,6 @@
             "method": "PUT",
             "header": [
               {
-                "key": "Authorization",
-                "value": "Bearer {{access_token}}",
-                "type": "text"
-              },
-              {
                 "key": "Content-Type",
                 "value": "application/json",
                 "type": "text"
@@ -1280,6 +1579,12 @@
                 "key": "Accept",
                 "value": "application/json",
                 "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text",
+                "disabled": false
               }
             ],
             "body": {
@@ -1309,12 +1614,30 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "pre-request-script",
+                "id": "auth-pre-request",
                 "type": "text/javascript",
                 "exec": [
                   "// Ensure access token is set for protected endpoints",
                   "if (!pm.environment.get(\"access_token\")) {",
-                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "    console.log(\"Warning: No access_token found in environment. Please login/register first.\");",
+                  "    console.log(\"Request may fail due to missing authentication.\");",
+                  "}",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "auth-test",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Request completed with expected status\", function () {",
+                  "    pm.response.to.be.oneOf([200, 201, 204, 401, 403, 422]);",
+                  "});",
+                  "",
+                  "if (pm.response.code === 401) {",
+                  "    console.log(\"Unauthorized - token may have expired. Please re-authenticate.\");",
                   "}",
                   ""
                 ]
@@ -1328,14 +1651,15 @@
             "method": "DELETE",
             "header": [
               {
-                "key": "Authorization",
-                "value": "Bearer {{access_token}}",
-                "type": "text"
-              },
-              {
                 "key": "Accept",
                 "value": "application/json",
                 "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text",
+                "disabled": false
               }
             ],
             "url": {
@@ -1356,12 +1680,30 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "pre-request-script",
+                "id": "auth-pre-request",
                 "type": "text/javascript",
                 "exec": [
                   "// Ensure access token is set for protected endpoints",
                   "if (!pm.environment.get(\"access_token\")) {",
-                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "    console.log(\"Warning: No access_token found in environment. Please login/register first.\");",
+                  "    console.log(\"Request may fail due to missing authentication.\");",
+                  "}",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "auth-test",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Request completed with expected status\", function () {",
+                  "    pm.response.to.be.oneOf([200, 201, 204, 401, 403, 422]);",
+                  "});",
+                  "",
+                  "if (pm.response.code === 401) {",
+                  "    console.log(\"Unauthorized - token may have expired. Please re-authenticate.\");",
                   "}",
                   ""
                 ]
@@ -1375,14 +1717,15 @@
             "method": "POST",
             "header": [
               {
-                "key": "Authorization",
-                "value": "Bearer {{access_token}}",
-                "type": "text"
-              },
-              {
                 "key": "Accept",
                 "value": "application/json",
                 "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text",
+                "disabled": false
               }
             ],
             "url": {
@@ -1404,12 +1747,30 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "pre-request-script",
+                "id": "auth-pre-request",
                 "type": "text/javascript",
                 "exec": [
                   "// Ensure access token is set for protected endpoints",
                   "if (!pm.environment.get(\"access_token\")) {",
-                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "    console.log(\"Warning: No access_token found in environment. Please login/register first.\");",
+                  "    console.log(\"Request may fail due to missing authentication.\");",
+                  "}",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "auth-test",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Request completed with expected status\", function () {",
+                  "    pm.response.to.be.oneOf([200, 201, 204, 401, 403, 422]);",
+                  "});",
+                  "",
+                  "if (pm.response.code === 401) {",
+                  "    console.log(\"Unauthorized - token may have expired. Please re-authenticate.\");",
                   "}",
                   ""
                 ]
@@ -1429,14 +1790,15 @@
             "method": "GET",
             "header": [
               {
-                "key": "Authorization",
-                "value": "Bearer {{access_token}}",
-                "type": "text"
-              },
-              {
                 "key": "Accept",
                 "value": "application/json",
                 "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text",
+                "disabled": false
               }
             ],
             "url": {
@@ -1456,12 +1818,30 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "pre-request-script",
+                "id": "auth-pre-request",
                 "type": "text/javascript",
                 "exec": [
                   "// Ensure access token is set for protected endpoints",
                   "if (!pm.environment.get(\"access_token\")) {",
-                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "    console.log(\"Warning: No access_token found in environment. Please login/register first.\");",
+                  "    console.log(\"Request may fail due to missing authentication.\");",
+                  "}",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "auth-test",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Request completed with expected status\", function () {",
+                  "    pm.response.to.be.oneOf([200, 201, 204, 401, 403, 422]);",
+                  "});",
+                  "",
+                  "if (pm.response.code === 401) {",
+                  "    console.log(\"Unauthorized - token may have expired. Please re-authenticate.\");",
                   "}",
                   ""
                 ]
@@ -1475,11 +1855,6 @@
             "method": "POST",
             "header": [
               {
-                "key": "Authorization",
-                "value": "Bearer {{access_token}}",
-                "type": "text"
-              },
-              {
                 "key": "Content-Type",
                 "value": "application/json",
                 "type": "text"
@@ -1488,6 +1863,12 @@
                 "key": "Accept",
                 "value": "application/json",
                 "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text",
+                "disabled": false
               }
             ],
             "body": {
@@ -1516,12 +1897,30 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "pre-request-script",
+                "id": "auth-pre-request",
                 "type": "text/javascript",
                 "exec": [
                   "// Ensure access token is set for protected endpoints",
                   "if (!pm.environment.get(\"access_token\")) {",
-                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "    console.log(\"Warning: No access_token found in environment. Please login/register first.\");",
+                  "    console.log(\"Request may fail due to missing authentication.\");",
+                  "}",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "auth-test",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Request completed with expected status\", function () {",
+                  "    pm.response.to.be.oneOf([200, 201, 204, 401, 403, 422]);",
+                  "});",
+                  "",
+                  "if (pm.response.code === 401) {",
+                  "    console.log(\"Unauthorized - token may have expired. Please re-authenticate.\");",
                   "}",
                   ""
                 ]
@@ -1535,14 +1934,15 @@
             "method": "GET",
             "header": [
               {
-                "key": "Authorization",
-                "value": "Bearer {{access_token}}",
-                "type": "text"
-              },
-              {
                 "key": "Accept",
                 "value": "application/json",
                 "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text",
+                "disabled": false
               }
             ],
             "url": {
@@ -1563,12 +1963,30 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "pre-request-script",
+                "id": "auth-pre-request",
                 "type": "text/javascript",
                 "exec": [
                   "// Ensure access token is set for protected endpoints",
                   "if (!pm.environment.get(\"access_token\")) {",
-                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "    console.log(\"Warning: No access_token found in environment. Please login/register first.\");",
+                  "    console.log(\"Request may fail due to missing authentication.\");",
+                  "}",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "auth-test",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Request completed with expected status\", function () {",
+                  "    pm.response.to.be.oneOf([200, 201, 204, 401, 403, 422]);",
+                  "});",
+                  "",
+                  "if (pm.response.code === 401) {",
+                  "    console.log(\"Unauthorized - token may have expired. Please re-authenticate.\");",
                   "}",
                   ""
                 ]
@@ -1582,11 +2000,6 @@
             "method": "PUT",
             "header": [
               {
-                "key": "Authorization",
-                "value": "Bearer {{access_token}}",
-                "type": "text"
-              },
-              {
                 "key": "Content-Type",
                 "value": "application/json",
                 "type": "text"
@@ -1595,6 +2008,12 @@
                 "key": "Accept",
                 "value": "application/json",
                 "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text",
+                "disabled": false
               }
             ],
             "body": {
@@ -1624,12 +2043,30 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "pre-request-script",
+                "id": "auth-pre-request",
                 "type": "text/javascript",
                 "exec": [
                   "// Ensure access token is set for protected endpoints",
                   "if (!pm.environment.get(\"access_token\")) {",
-                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "    console.log(\"Warning: No access_token found in environment. Please login/register first.\");",
+                  "    console.log(\"Request may fail due to missing authentication.\");",
+                  "}",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "auth-test",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Request completed with expected status\", function () {",
+                  "    pm.response.to.be.oneOf([200, 201, 204, 401, 403, 422]);",
+                  "});",
+                  "",
+                  "if (pm.response.code === 401) {",
+                  "    console.log(\"Unauthorized - token may have expired. Please re-authenticate.\");",
                   "}",
                   ""
                 ]
@@ -1643,14 +2080,15 @@
             "method": "DELETE",
             "header": [
               {
-                "key": "Authorization",
-                "value": "Bearer {{access_token}}",
-                "type": "text"
-              },
-              {
                 "key": "Accept",
                 "value": "application/json",
                 "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text",
+                "disabled": false
               }
             ],
             "url": {
@@ -1671,12 +2109,30 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "pre-request-script",
+                "id": "auth-pre-request",
                 "type": "text/javascript",
                 "exec": [
                   "// Ensure access token is set for protected endpoints",
                   "if (!pm.environment.get(\"access_token\")) {",
-                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "    console.log(\"Warning: No access_token found in environment. Please login/register first.\");",
+                  "    console.log(\"Request may fail due to missing authentication.\");",
+                  "}",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "auth-test",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Request completed with expected status\", function () {",
+                  "    pm.response.to.be.oneOf([200, 201, 204, 401, 403, 422]);",
+                  "});",
+                  "",
+                  "if (pm.response.code === 401) {",
+                  "    console.log(\"Unauthorized - token may have expired. Please re-authenticate.\");",
                   "}",
                   ""
                 ]
@@ -1690,14 +2146,15 @@
             "method": "GET",
             "header": [
               {
-                "key": "Authorization",
-                "value": "Bearer {{access_token}}",
-                "type": "text"
-              },
-              {
                 "key": "Accept",
                 "value": "application/json",
                 "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text",
+                "disabled": false
               }
             ],
             "url": {
@@ -1719,12 +2176,30 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "pre-request-script",
+                "id": "auth-pre-request",
                 "type": "text/javascript",
                 "exec": [
                   "// Ensure access token is set for protected endpoints",
                   "if (!pm.environment.get(\"access_token\")) {",
-                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "    console.log(\"Warning: No access_token found in environment. Please login/register first.\");",
+                  "    console.log(\"Request may fail due to missing authentication.\");",
+                  "}",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "auth-test",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Request completed with expected status\", function () {",
+                  "    pm.response.to.be.oneOf([200, 201, 204, 401, 403, 422]);",
+                  "});",
+                  "",
+                  "if (pm.response.code === 401) {",
+                  "    console.log(\"Unauthorized - token may have expired. Please re-authenticate.\");",
                   "}",
                   ""
                 ]
@@ -1738,11 +2213,6 @@
             "method": "POST",
             "header": [
               {
-                "key": "Authorization",
-                "value": "Bearer {{access_token}}",
-                "type": "text"
-              },
-              {
                 "key": "Content-Type",
                 "value": "application/json",
                 "type": "text"
@@ -1751,6 +2221,12 @@
                 "key": "Accept",
                 "value": "application/json",
                 "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text",
+                "disabled": false
               }
             ],
             "body": {
@@ -1781,12 +2257,30 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "pre-request-script",
+                "id": "auth-pre-request",
                 "type": "text/javascript",
                 "exec": [
                   "// Ensure access token is set for protected endpoints",
                   "if (!pm.environment.get(\"access_token\")) {",
-                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "    console.log(\"Warning: No access_token found in environment. Please login/register first.\");",
+                  "    console.log(\"Request may fail due to missing authentication.\");",
+                  "}",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "auth-test",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Request completed with expected status\", function () {",
+                  "    pm.response.to.be.oneOf([200, 201, 204, 401, 403, 422]);",
+                  "});",
+                  "",
+                  "if (pm.response.code === 401) {",
+                  "    console.log(\"Unauthorized - token may have expired. Please re-authenticate.\");",
                   "}",
                   ""
                 ]
@@ -1800,14 +2294,15 @@
             "method": "GET",
             "header": [
               {
-                "key": "Authorization",
-                "value": "Bearer {{access_token}}",
-                "type": "text"
-              },
-              {
                 "key": "Accept",
                 "value": "application/json",
                 "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text",
+                "disabled": false
               }
             ],
             "url": {
@@ -1829,12 +2324,30 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "pre-request-script",
+                "id": "auth-pre-request",
                 "type": "text/javascript",
                 "exec": [
                   "// Ensure access token is set for protected endpoints",
                   "if (!pm.environment.get(\"access_token\")) {",
-                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "    console.log(\"Warning: No access_token found in environment. Please login/register first.\");",
+                  "    console.log(\"Request may fail due to missing authentication.\");",
+                  "}",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "auth-test",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Request completed with expected status\", function () {",
+                  "    pm.response.to.be.oneOf([200, 201, 204, 401, 403, 422]);",
+                  "});",
+                  "",
+                  "if (pm.response.code === 401) {",
+                  "    console.log(\"Unauthorized - token may have expired. Please re-authenticate.\");",
                   "}",
                   ""
                 ]
@@ -1854,14 +2367,15 @@
             "method": "GET",
             "header": [
               {
-                "key": "Authorization",
-                "value": "Bearer {{access_token}}",
-                "type": "text"
-              },
-              {
                 "key": "Accept",
                 "value": "application/json",
                 "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text",
+                "disabled": false
               }
             ],
             "url": {
@@ -1881,12 +2395,30 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "pre-request-script",
+                "id": "auth-pre-request",
                 "type": "text/javascript",
                 "exec": [
                   "// Ensure access token is set for protected endpoints",
                   "if (!pm.environment.get(\"access_token\")) {",
-                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "    console.log(\"Warning: No access_token found in environment. Please login/register first.\");",
+                  "    console.log(\"Request may fail due to missing authentication.\");",
+                  "}",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "auth-test",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Request completed with expected status\", function () {",
+                  "    pm.response.to.be.oneOf([200, 201, 204, 401, 403, 422]);",
+                  "});",
+                  "",
+                  "if (pm.response.code === 401) {",
+                  "    console.log(\"Unauthorized - token may have expired. Please re-authenticate.\");",
                   "}",
                   ""
                 ]
@@ -1900,11 +2432,6 @@
             "method": "POST",
             "header": [
               {
-                "key": "Authorization",
-                "value": "Bearer {{access_token}}",
-                "type": "text"
-              },
-              {
                 "key": "Content-Type",
                 "value": "application/json",
                 "type": "text"
@@ -1913,6 +2440,12 @@
                 "key": "Accept",
                 "value": "application/json",
                 "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text",
+                "disabled": false
               }
             ],
             "body": {
@@ -1941,12 +2474,30 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "pre-request-script",
+                "id": "auth-pre-request",
                 "type": "text/javascript",
                 "exec": [
                   "// Ensure access token is set for protected endpoints",
                   "if (!pm.environment.get(\"access_token\")) {",
-                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "    console.log(\"Warning: No access_token found in environment. Please login/register first.\");",
+                  "    console.log(\"Request may fail due to missing authentication.\");",
+                  "}",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "auth-test",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Request completed with expected status\", function () {",
+                  "    pm.response.to.be.oneOf([200, 201, 204, 401, 403, 422]);",
+                  "});",
+                  "",
+                  "if (pm.response.code === 401) {",
+                  "    console.log(\"Unauthorized - token may have expired. Please re-authenticate.\");",
                   "}",
                   ""
                 ]
@@ -1960,14 +2511,15 @@
             "method": "GET",
             "header": [
               {
-                "key": "Authorization",
-                "value": "Bearer {{access_token}}",
-                "type": "text"
-              },
-              {
                 "key": "Accept",
                 "value": "application/json",
                 "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text",
+                "disabled": false
               }
             ],
             "url": {
@@ -1988,12 +2540,30 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "pre-request-script",
+                "id": "auth-pre-request",
                 "type": "text/javascript",
                 "exec": [
                   "// Ensure access token is set for protected endpoints",
                   "if (!pm.environment.get(\"access_token\")) {",
-                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "    console.log(\"Warning: No access_token found in environment. Please login/register first.\");",
+                  "    console.log(\"Request may fail due to missing authentication.\");",
+                  "}",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "auth-test",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Request completed with expected status\", function () {",
+                  "    pm.response.to.be.oneOf([200, 201, 204, 401, 403, 422]);",
+                  "});",
+                  "",
+                  "if (pm.response.code === 401) {",
+                  "    console.log(\"Unauthorized - token may have expired. Please re-authenticate.\");",
                   "}",
                   ""
                 ]
@@ -2007,11 +2577,6 @@
             "method": "PUT",
             "header": [
               {
-                "key": "Authorization",
-                "value": "Bearer {{access_token}}",
-                "type": "text"
-              },
-              {
                 "key": "Content-Type",
                 "value": "application/json",
                 "type": "text"
@@ -2020,6 +2585,12 @@
                 "key": "Accept",
                 "value": "application/json",
                 "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text",
+                "disabled": false
               }
             ],
             "body": {
@@ -2049,12 +2620,30 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "pre-request-script",
+                "id": "auth-pre-request",
                 "type": "text/javascript",
                 "exec": [
                   "// Ensure access token is set for protected endpoints",
                   "if (!pm.environment.get(\"access_token\")) {",
-                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "    console.log(\"Warning: No access_token found in environment. Please login/register first.\");",
+                  "    console.log(\"Request may fail due to missing authentication.\");",
+                  "}",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "auth-test",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Request completed with expected status\", function () {",
+                  "    pm.response.to.be.oneOf([200, 201, 204, 401, 403, 422]);",
+                  "});",
+                  "",
+                  "if (pm.response.code === 401) {",
+                  "    console.log(\"Unauthorized - token may have expired. Please re-authenticate.\");",
                   "}",
                   ""
                 ]
@@ -2068,14 +2657,15 @@
             "method": "DELETE",
             "header": [
               {
-                "key": "Authorization",
-                "value": "Bearer {{access_token}}",
-                "type": "text"
-              },
-              {
                 "key": "Accept",
                 "value": "application/json",
                 "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text",
+                "disabled": false
               }
             ],
             "url": {
@@ -2096,12 +2686,30 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "pre-request-script",
+                "id": "auth-pre-request",
                 "type": "text/javascript",
                 "exec": [
                   "// Ensure access token is set for protected endpoints",
                   "if (!pm.environment.get(\"access_token\")) {",
-                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "    console.log(\"Warning: No access_token found in environment. Please login/register first.\");",
+                  "    console.log(\"Request may fail due to missing authentication.\");",
+                  "}",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "auth-test",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Request completed with expected status\", function () {",
+                  "    pm.response.to.be.oneOf([200, 201, 204, 401, 403, 422]);",
+                  "});",
+                  "",
+                  "if (pm.response.code === 401) {",
+                  "    console.log(\"Unauthorized - token may have expired. Please re-authenticate.\");",
                   "}",
                   ""
                 ]
@@ -2115,14 +2723,15 @@
             "method": "GET",
             "header": [
               {
-                "key": "Authorization",
-                "value": "Bearer {{access_token}}",
-                "type": "text"
-              },
-              {
                 "key": "Accept",
                 "value": "application/json",
                 "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text",
+                "disabled": false
               }
             ],
             "url": {
@@ -2144,12 +2753,30 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "pre-request-script",
+                "id": "auth-pre-request",
                 "type": "text/javascript",
                 "exec": [
                   "// Ensure access token is set for protected endpoints",
                   "if (!pm.environment.get(\"access_token\")) {",
-                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "    console.log(\"Warning: No access_token found in environment. Please login/register first.\");",
+                  "    console.log(\"Request may fail due to missing authentication.\");",
+                  "}",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "auth-test",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Request completed with expected status\", function () {",
+                  "    pm.response.to.be.oneOf([200, 201, 204, 401, 403, 422]);",
+                  "});",
+                  "",
+                  "if (pm.response.code === 401) {",
+                  "    console.log(\"Unauthorized - token may have expired. Please re-authenticate.\");",
                   "}",
                   ""
                 ]
@@ -2169,14 +2796,15 @@
             "method": "GET",
             "header": [
               {
-                "key": "Authorization",
-                "value": "Bearer {{access_token}}",
-                "type": "text"
-              },
-              {
                 "key": "Accept",
                 "value": "application/json",
                 "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text",
+                "disabled": false
               }
             ],
             "url": {
@@ -2196,12 +2824,30 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "pre-request-script",
+                "id": "auth-pre-request",
                 "type": "text/javascript",
                 "exec": [
                   "// Ensure access token is set for protected endpoints",
                   "if (!pm.environment.get(\"access_token\")) {",
-                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "    console.log(\"Warning: No access_token found in environment. Please login/register first.\");",
+                  "    console.log(\"Request may fail due to missing authentication.\");",
+                  "}",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "auth-test",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Request completed with expected status\", function () {",
+                  "    pm.response.to.be.oneOf([200, 201, 204, 401, 403, 422]);",
+                  "});",
+                  "",
+                  "if (pm.response.code === 401) {",
+                  "    console.log(\"Unauthorized - token may have expired. Please re-authenticate.\");",
                   "}",
                   ""
                 ]
@@ -2215,14 +2861,15 @@
             "method": "GET",
             "header": [
               {
-                "key": "Authorization",
-                "value": "Bearer {{access_token}}",
-                "type": "text"
-              },
-              {
                 "key": "Accept",
                 "value": "application/json",
                 "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text",
+                "disabled": false
               }
             ],
             "url": {
@@ -2244,12 +2891,30 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "pre-request-script",
+                "id": "auth-pre-request",
                 "type": "text/javascript",
                 "exec": [
                   "// Ensure access token is set for protected endpoints",
                   "if (!pm.environment.get(\"access_token\")) {",
-                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "    console.log(\"Warning: No access_token found in environment. Please login/register first.\");",
+                  "    console.log(\"Request may fail due to missing authentication.\");",
+                  "}",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "auth-test",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Request completed with expected status\", function () {",
+                  "    pm.response.to.be.oneOf([200, 201, 204, 401, 403, 422]);",
+                  "});",
+                  "",
+                  "if (pm.response.code === 401) {",
+                  "    console.log(\"Unauthorized - token may have expired. Please re-authenticate.\");",
                   "}",
                   ""
                 ]
@@ -2269,14 +2934,15 @@
             "method": "GET",
             "header": [
               {
-                "key": "Authorization",
-                "value": "Bearer {{access_token}}",
-                "type": "text"
-              },
-              {
                 "key": "Accept",
                 "value": "application/json",
                 "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text",
+                "disabled": false
               }
             ],
             "url": {
@@ -2297,12 +2963,30 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "pre-request-script",
+                "id": "auth-pre-request",
                 "type": "text/javascript",
                 "exec": [
                   "// Ensure access token is set for protected endpoints",
                   "if (!pm.environment.get(\"access_token\")) {",
-                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "    console.log(\"Warning: No access_token found in environment. Please login/register first.\");",
+                  "    console.log(\"Request may fail due to missing authentication.\");",
+                  "}",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "auth-test",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Request completed with expected status\", function () {",
+                  "    pm.response.to.be.oneOf([200, 201, 204, 401, 403, 422]);",
+                  "});",
+                  "",
+                  "if (pm.response.code === 401) {",
+                  "    console.log(\"Unauthorized - token may have expired. Please re-authenticate.\");",
                   "}",
                   ""
                 ]
@@ -2316,14 +3000,15 @@
             "method": "GET",
             "header": [
               {
-                "key": "Authorization",
-                "value": "Bearer {{access_token}}",
-                "type": "text"
-              },
-              {
                 "key": "Accept",
                 "value": "application/json",
                 "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text",
+                "disabled": false
               }
             ],
             "url": {
@@ -2344,12 +3029,30 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "pre-request-script",
+                "id": "auth-pre-request",
                 "type": "text/javascript",
                 "exec": [
                   "// Ensure access token is set for protected endpoints",
                   "if (!pm.environment.get(\"access_token\")) {",
-                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "    console.log(\"Warning: No access_token found in environment. Please login/register first.\");",
+                  "    console.log(\"Request may fail due to missing authentication.\");",
+                  "}",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "auth-test",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Request completed with expected status\", function () {",
+                  "    pm.response.to.be.oneOf([200, 201, 204, 401, 403, 422]);",
+                  "});",
+                  "",
+                  "if (pm.response.code === 401) {",
+                  "    console.log(\"Unauthorized - token may have expired. Please re-authenticate.\");",
                   "}",
                   ""
                 ]
@@ -2363,14 +3066,15 @@
             "method": "GET",
             "header": [
               {
-                "key": "Authorization",
-                "value": "Bearer {{access_token}}",
-                "type": "text"
-              },
-              {
                 "key": "Accept",
                 "value": "application/json",
                 "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}",
+                "type": "text",
+                "disabled": false
               }
             ],
             "url": {
@@ -2391,12 +3095,30 @@
             {
               "listen": "prerequest",
               "script": {
-                "id": "pre-request-script",
+                "id": "auth-pre-request",
                 "type": "text/javascript",
                 "exec": [
                   "// Ensure access token is set for protected endpoints",
                   "if (!pm.environment.get(\"access_token\")) {",
-                  "    console.log(\"Warning: No access_token found in environment. Please login first.\");",
+                  "    console.log(\"Warning: No access_token found in environment. Please login/register first.\");",
+                  "    console.log(\"Request may fail due to missing authentication.\");",
+                  "}",
+                  ""
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "id": "auth-test",
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Request completed with expected status\", function () {",
+                  "    pm.response.to.be.oneOf([200, 201, 204, 401, 403, 422]);",
+                  "});",
+                  "",
+                  "if (pm.response.code === 401) {",
+                  "    console.log(\"Unauthorized - token may have expired. Please re-authenticate.\");",
                   "}",
                   ""
                 ]

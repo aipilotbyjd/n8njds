@@ -17,17 +17,23 @@ class DatabaseSeeder extends Seeder
         $this->call(RolesAndPermissionsSeeder::class);
 
         // Create a default admin user
-        $admin = User::factory()->create([
-            'name' => 'Admin User',
+        $admin = User::firstOrCreate([
             'email' => 'admin@example.com',
+        ], [
+            'name' => 'Admin User',
+            'password' => bcrypt('password'),
         ]);
         $admin->assignRole('admin');
 
         // Create a default standard user
-        $user = User::factory()->create([
-            'name' => 'Standard User',
+        $user = User::firstOrCreate([
             'email' => 'user@example.com',
+        ], [
+            'name' => 'Standard User',
+            'password' => bcrypt('password'),
         ]);
         $user->assignRole('user');
+
+        $this->call(SubscriptionPlansSeeder::class);
     }
 }

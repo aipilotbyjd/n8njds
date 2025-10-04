@@ -8,6 +8,11 @@ class NodeFactory
         'manual-trigger' => ManualTriggerNode::class,
         'http-request' => HttpRequestNode::class,
         'log' => LogNode::class,
+        'if' => IfNode::class,
+        'switch' => SwitchNode::class,
+        'data-transform' => DataTransformNode::class,
+        'merge' => MergeNode::class,
+        'split' => SplitNode::class,
     ];
 
     public static function create(string $type, string $id, string $name, array $parameters = []): ?NodeInterface

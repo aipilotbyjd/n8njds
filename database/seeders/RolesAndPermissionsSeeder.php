@@ -27,11 +27,11 @@ class RolesAndPermissionsSeeder extends Seeder
         ];
 
         foreach ($permissions as $permission) {
-            Permission::create(['name' => $permission]);
+            Permission::firstOrCreate(['name' => $permission]);
         }
 
         // Create a standard user role and assign specific permissions
-        $userRole = Role::create(['name' => 'user']);
+        $userRole = Role::firstOrCreate(['name' => 'user']);
         $userRole->givePermissionTo([
             'workflows.create',
             'workflows.read',
@@ -40,7 +40,7 @@ class RolesAndPermissionsSeeder extends Seeder
         ]);
 
         // Create an admin role
-        $adminRole = Role::create(['name' => 'admin']);
+        $adminRole = Role::firstOrCreate(['name' => 'admin']);
         // Admins get all permissions implicitly via a Gate defined in a service provider
         // This is more robust than assigning every permission manually.
     }

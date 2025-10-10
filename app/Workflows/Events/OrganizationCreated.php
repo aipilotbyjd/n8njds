@@ -2,9 +2,9 @@
 
 namespace App\Workflows\Events;
 
+use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Broadcasting\InteractsWithSockets;
 
 class OrganizationCreated
 {
@@ -14,6 +14,5 @@ class OrganizationCreated
         public string $organizationId,
         public string $name,
         public string $ownerId
-    ) {
-    }
+    ) {}
 }

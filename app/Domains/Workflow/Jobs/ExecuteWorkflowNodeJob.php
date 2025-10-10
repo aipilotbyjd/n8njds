@@ -20,13 +20,13 @@ class ExecuteWorkflowNodeJob implements ShouldQueue
         public string $workflowExecutionId,
         public string $nodeId,
         public array $input
-    ) {
-    }
+    ) {}
 
     public function backoff(): array
     {
         return [1, 5, 10];
     }
+
     public function handle(): void
     {
         $execution = WorkflowExecution::findOrFail($this->workflowExecutionId);
@@ -48,10 +48,11 @@ class ExecuteWorkflowNodeJob implements ShouldQueue
             }
         }
 
-        if (!$nodeData) {
+        if (! $nodeData) {
             $nodeExecutions[$this->nodeId]['status'] = 'error';
             $nodeExecutions[$this->nodeId]['error'] = 'Node not found';
             $execution->update(['node_executions' => $nodeExecutions]);
+
             return;
         }
 
@@ -71,7 +72,7 @@ class ExecuteWorkflowNodeJob implements ShouldQueue
                     $source = $connection['source'];
                     $target = $connection['target'];
                     $sourceHandle = $connection['source_handle'] ?? null;
-                    if (!isset($adjacencyList[$source])) {
+                    if (! isset($adjacencyList[$source])) {
                         $adjacencyList[$source] = [];
                     }
                     $adjacencyList[$source][] = ['target' => $target, 'source_handle' => $sourceHandle];

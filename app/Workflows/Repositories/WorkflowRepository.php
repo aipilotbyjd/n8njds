@@ -9,7 +9,7 @@ class WorkflowRepository extends BaseRepository
 {
     public function __construct()
     {
-        $this->model = new Workflow();
+        $this->model = new Workflow;
     }
 
     public function getActiveWorkflows()

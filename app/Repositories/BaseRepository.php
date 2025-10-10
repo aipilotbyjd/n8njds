@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 use App\Shared\Interfaces\CriteriaInterface;
 use App\Shared\Interfaces\RepositoryInterface;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 abstract class BaseRepository implements RepositoryInterface
@@ -41,8 +40,10 @@ abstract class BaseRepository implements RepositoryInterface
         $model = $this->model->find($id);
         if ($model) {
             $model->update($data);
+
             return $model;
         }
+
         return null;
     }
 

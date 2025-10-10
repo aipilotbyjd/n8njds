@@ -121,7 +121,7 @@ class WorkflowExecution extends Model
      */
     public function getDurationInSeconds(): ?int
     {
-        if (!$this->started_at || !$this->finished_at) {
+        if (! $this->started_at || ! $this->finished_at) {
             return null;
         }
 

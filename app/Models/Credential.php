@@ -59,11 +59,13 @@ class Credential extends Model
                 // Log the error but don't expose it
                 \Log::error('Failed to decrypt credential data', [
                     'credential_id' => $this->id,
-                    'error' => $e->getMessage()
+                    'error' => $e->getMessage(),
                 ]);
+
                 return null;
             }
         }
+
         return null;
     }
 

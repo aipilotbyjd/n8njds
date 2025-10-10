@@ -18,8 +18,8 @@ class WorkflowMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         $workflowId = $request->route('workflow');
-        
-        if (!$workflowId) {
+
+        if (! $workflowId) {
             return $next($request);
         }
 
@@ -27,24 +27,24 @@ class WorkflowMiddleware
         if ($workflowId instanceof Workflow) {
             $workflowId = $workflowId->id;
         }
-        
+
         $user = Auth::user();
-        
+
         // Check if user has access to this workflow
         $workflow = Workflow::find($workflowId);
-        
-        if (!$workflow) {
+
+        if (! $workflow) {
             return response()->json([
-                'message' => 'Workflow not found'
+                'message' => 'Workflow not found',
             ], 404);
         }
-        
-        $hasAccess = $workflow->user_id === $user->id || 
+
+        $hasAccess = $workflow->user_id === $user->id ||
                      ($workflow->organization_id && $user->organizations()->where('organization_id', $workflow->organization_id)->exists());
-        
-        if (!$hasAccess) {
+
+        if (! $hasAccess) {
             return response()->json([
-                'message' => 'Unauthorized to access this workflow'
+                'message' => 'Unauthorized to access this workflow',
             ], 403);
         }
 

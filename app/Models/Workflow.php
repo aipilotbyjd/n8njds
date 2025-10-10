@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Database\Eloquent\Builder;
 
 class Workflow extends Model
 {
@@ -58,7 +58,7 @@ class Workflow extends Model
      * @var string
      */
     protected $keyType = 'string';
-    
+
     public $incrementing = false;
 
     /**
@@ -85,7 +85,7 @@ class Workflow extends Model
     protected static function boot(): void
     {
         parent::boot();
-        
+
         static::creating(function (self $model): void {
             if (empty($model->{$model->getKeyName()})) {
                 $model->{$model->getKeyName()} = \Illuminate\Support\Str::uuid();
@@ -176,7 +176,7 @@ class Workflow extends Model
 
         return $query->where(function (Builder $q) use ($search) {
             $q->where('name', 'LIKE', "%{$search}%")
-              ->orWhere('description', 'LIKE', "%{$search}%");
+                ->orWhere('description', 'LIKE', "%{$search}%");
         });
     }
 
@@ -211,14 +211,14 @@ class Workflow extends Model
             'last_execution' => $this->executions()->latest()->first(),
         ];
     }
-    
+
     /**
      * Create a new version of the workflow
      */
     public function createVersion(array $data, string $userId, ?string $commitMessage = null): WorkflowVersion
     {
         $versionNumber = ($this->versions()->max('version_number') ?? 0) + 1;
-        
+
         return WorkflowVersion::create([
             'workflow_id' => $this->uuid,
             'version_number' => $versionNumber,

@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Organization;
 use App\Models\OrganizationUser;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class OrganizationMemberController extends Controller
@@ -18,22 +18,22 @@ class OrganizationMemberController extends Controller
     public function index(Organization $organization, Request $request): JsonResponse
     {
         $user = $request->user();
-        
+
         // Check if user has access to this organization
         $membership = $user->organizationMemberships()
             ->where('organization_id', $organization->id)
             ->first();
-            
-        if (!$membership) {
+
+        if (! $membership) {
             return response()->json([
-                'message' => 'Unauthorized to access this organization'
+                'message' => 'Unauthorized to access this organization',
             ], 403);
         }
 
         $members = $organization->users()->withPivot('role', 'is_active', 'joined_at')->get();
 
         return response()->json([
-            'members' => $members
+            'members' => $members,
         ]);
     }
 
@@ -43,15 +43,15 @@ class OrganizationMemberController extends Controller
     public function store(Request $request, Organization $organization): JsonResponse
     {
         $user = $request->user();
-        
+
         // Check if user is owner or admin of the organization
         $userMembership = $user->organizationMemberships()
             ->where('organization_id', $organization->id)
             ->first();
-            
-        if (!$userMembership || !in_array($userMembership->role, ['owner', 'admin'])) {
+
+        if (! $userMembership || ! in_array($userMembership->role, ['owner', 'admin'])) {
             return response()->json([
-                'message' => 'Unauthorized to add members to this organization'
+                'message' => 'Unauthorized to add members to this organization',
             ], 403);
         }
 
@@ -63,7 +63,7 @@ class OrganizationMemberController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'message' => 'Validation failed',
-                'errors' => $validator->errors()
+                'errors' => $validator->errors(),
             ], 422);
         }
 
@@ -72,12 +72,12 @@ class OrganizationMemberController extends Controller
         // Check if user is already a member
         $existingMembership = OrganizationUser::where([
             'organization_id' => $organization->id,
-            'user_id' => $member->id
+            'user_id' => $member->id,
         ])->first();
 
         if ($existingMembership) {
             return response()->json([
-                'message' => 'User is already a member of this organization'
+                'message' => 'User is already a member of this organization',
             ], 422);
         }
 
@@ -91,7 +91,7 @@ class OrganizationMemberController extends Controller
         return response()->json([
             'message' => 'Member added successfully',
             'member' => $member,
-            'membership' => $membership
+            'membership' => $membership,
         ], 201);
     }
 
@@ -101,34 +101,34 @@ class OrganizationMemberController extends Controller
     public function update(Request $request, Organization $organization, User $member): JsonResponse
     {
         $user = $request->user();
-        
+
         // Check if user is owner or admin of the organization
         $userMembership = $user->organizationMemberships()
             ->where('organization_id', $organization->id)
             ->first();
-            
-        if (!$userMembership || !in_array($userMembership->role, ['owner', 'admin'])) {
+
+        if (! $userMembership || ! in_array($userMembership->role, ['owner', 'admin'])) {
             return response()->json([
-                'message' => 'Unauthorized to update members in this organization'
+                'message' => 'Unauthorized to update members in this organization',
             ], 403);
         }
 
         // Check if the member exists in the organization
         $membership = OrganizationUser::where([
             'organization_id' => $organization->id,
-            'user_id' => $member->id
+            'user_id' => $member->id,
         ])->first();
 
-        if (!$membership) {
+        if (! $membership) {
             return response()->json([
-                'message' => 'User is not a member of this organization'
+                'message' => 'User is not a member of this organization',
             ], 404);
         }
 
         // Prevent changing the owner's role
         if ($organization->owner_id === $member->id) {
             return response()->json([
-                'message' => 'Cannot change the owner\'s role'
+                'message' => 'Cannot change the owner\'s role',
             ], 403);
         }
 
@@ -139,7 +139,7 @@ class OrganizationMemberController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'message' => 'Validation failed',
-                'errors' => $validator->errors()
+                'errors' => $validator->errors(),
             ], 422);
         }
 
@@ -149,7 +149,7 @@ class OrganizationMemberController extends Controller
 
         return response()->json([
             'message' => 'Member role updated successfully',
-            'membership' => $membership
+            'membership' => $membership,
         ]);
     }
 
@@ -159,34 +159,34 @@ class OrganizationMemberController extends Controller
     public function destroy(Request $request, Organization $organization, User $member): JsonResponse
     {
         $user = $request->user();
-        
+
         // Check if user is owner or admin of the organization
         $userMembership = $user->organizationMemberships()
             ->where('organization_id', $organization->id)
             ->first();
-            
-        if (!$userMembership || !in_array($userMembership->role, ['owner', 'admin'])) {
+
+        if (! $userMembership || ! in_array($userMembership->role, ['owner', 'admin'])) {
             return response()->json([
-                'message' => 'Unauthorized to remove members from this organization'
+                'message' => 'Unauthorized to remove members from this organization',
             ], 403);
         }
 
         // Check if the member exists in the organization
         $membership = OrganizationUser::where([
             'organization_id' => $organization->id,
-            'user_id' => $member->id
+            'user_id' => $member->id,
         ])->first();
 
-        if (!$membership) {
+        if (! $membership) {
             return response()->json([
-                'message' => 'User is not a member of this organization'
+                'message' => 'User is not a member of this organization',
             ], 404);
         }
 
         // Prevent removing the owner
         if ($organization->owner_id === $member->id) {
             return response()->json([
-                'message' => 'Cannot remove the owner from the organization'
+                'message' => 'Cannot remove the owner from the organization',
             ], 403);
         }
 
@@ -199,7 +199,7 @@ class OrganizationMemberController extends Controller
 
             if ($adminCount <= 1) {
                 return response()->json([
-                    'message' => 'Cannot remove the last admin from the organization'
+                    'message' => 'Cannot remove the last admin from the organization',
                 ], 403);
             }
         }
@@ -207,7 +207,7 @@ class OrganizationMemberController extends Controller
         $membership->delete();
 
         return response()->json([
-            'message' => 'Member removed successfully'
+            'message' => 'Member removed successfully',
         ]);
     }
 }

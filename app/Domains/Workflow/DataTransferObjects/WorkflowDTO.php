@@ -20,8 +20,7 @@ class WorkflowDTO extends Data
         public readonly string $created_by,
         public readonly ?string $updated_by,
         public readonly ?int $organization_id,
-    ) {
-    }
+    ) {}
 
     public static function fromRequest(Request $request): self
     {

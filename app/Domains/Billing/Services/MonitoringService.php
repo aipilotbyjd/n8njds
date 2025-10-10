@@ -7,7 +7,6 @@ use App\Models\SystemLog;
 use App\Models\WorkflowMonitoring;
 use App\Shared\Interfaces\ServiceInterface;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\DB;
 
 class MonitoringService implements ServiceInterface
 {

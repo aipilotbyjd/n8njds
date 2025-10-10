@@ -7,8 +7,11 @@ use Illuminate\Support\Facades\Log;
 abstract class BaseNode implements NodeInterface
 {
     protected string $id;
+
     protected string $name;
+
     protected string $description;
+
     protected array $parameters;
 
     public function __construct(string $id, string $name, array $parameters = [])
@@ -54,8 +57,9 @@ abstract class BaseNode implements NodeInterface
         } catch (\Exception $e) {
             Log::error('Node validation failed', [
                 'node_type' => static::class,
-                'error' => $e->getMessage()
+                'error' => $e->getMessage(),
             ]);
+
             return false;
         }
     }

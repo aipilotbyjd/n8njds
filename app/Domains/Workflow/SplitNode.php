@@ -8,7 +8,7 @@ class SplitNode extends BaseNode
     {
         $field = $this->parameters['field'] ?? null;
 
-        if (!$field || !isset($input[$field]) || !is_array($input[$field])) {
+        if (! $field || ! isset($input[$field]) || ! is_array($input[$field])) {
             return [
                 'status' => 'error',
                 'message' => 'Field to split is not an array or does not exist.',

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 class ApiVersioningService
 {
     public const CURRENT_VERSION = 'v1';
+
     public const SUPPORTED_VERSIONS = ['v1', 'v2'];
 
     /**
@@ -16,7 +17,7 @@ class ApiVersioningService
     {
         // Register v1 routes
         self::registerV1Routes();
-        
+
         // Future: Register v2 routes when available
         // self::registerV2Routes();
     }

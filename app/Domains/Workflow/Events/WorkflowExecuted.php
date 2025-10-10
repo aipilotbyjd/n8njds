@@ -14,6 +14,5 @@ class WorkflowExecuted
         public WorkflowExecution $execution,
         public float $executionTime,
         public string $status
-    ) {
-    }
+    ) {}
 }

@@ -1,14 +1,14 @@
 <?php
 
+use App\Domains\Billing\Services\MonitoringService;
 use Illuminate\Queue\Events\JobProcessed;
 use Illuminate\Queue\Events\JobProcessing;
 use Illuminate\Support\Facades\Queue;
-use App\Domains\Billing\Services\MonitoringService;
 
 // Register queue job event listeners for monitoring
 Queue::before(function (JobProcessing $event) {
     // Log when a job starts processing
-    $monitoring = new MonitoringService();
+    $monitoring = new MonitoringService;
     $monitoring->logInfo("Job started processing: {$event->job->getJobId()}", [
         'job_name' => $event->job->getName(),
         'connection_name' => $event->connectionName,
@@ -18,7 +18,7 @@ Queue::before(function (JobProcessing $event) {
 
 Queue::after(function (JobProcessed $event) {
     // Log when a job finishes processing
-    $monitoring = new MonitoringService();
+    $monitoring = new MonitoringService;
     $monitoring->logInfo("Job finished processing: {$event->job->getJobId()}", [
         'job_name' => $event->job->getName(),
         'connection_name' => $event->connectionName,
@@ -29,7 +29,7 @@ Queue::after(function (JobProcessed $event) {
 // Register queue failure event listener
 Queue::failing(function (\Illuminate\Queue\Events\JobFailed $event) {
     // Log when a job fails
-    $monitoring = new MonitoringService();
+    $monitoring = new MonitoringService;
     $monitoring->logError("Job failed: {$event->job->getJobId()}", [
         'job_name' => $event->job->getName(),
         'connection_name' => $event->connectionName,

@@ -4,17 +4,16 @@ namespace App\Http\Controllers\Api\V1\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Services\UserAuthenticationService;
-use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
 {
     public function __construct(
         private UserAuthenticationService $authService
-    ) {
-    }
+    ) {}
 
     /**
      * Handle a registration request for the application.
@@ -30,7 +29,7 @@ class RegisterController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'message' => 'Validation failed',
-                'errors' => $validator->errors()
+                'errors' => $validator->errors(),
             ], 422);
         }
 

@@ -27,7 +27,7 @@ return new class extends Migration
             $table->timestamp('expires_at')->nullable(); // If credential has an expiration
             $table->boolean('is_active')->default(true);
             $table->timestamps();
-            
+
             $table->index('type');
             $table->index('owned_by');
             $table->index('next_rotation_at');

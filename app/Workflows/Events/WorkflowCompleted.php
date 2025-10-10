@@ -2,9 +2,9 @@
 
 namespace App\Workflows\Events;
 
+use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Broadcasting\InteractsWithSockets;
 
 class WorkflowCompleted
 {
@@ -13,6 +13,5 @@ class WorkflowCompleted
     public function __construct(
         public string $executionId,
         public string $workflowId
-    ) {
-    }
+    ) {}
 }

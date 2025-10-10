@@ -3,14 +3,14 @@
 namespace App\Workflows\Models;
 
 use App\Models\Organization as EloquentOrganization;
-use App\ValueObjects\OrganizationId;
 use App\Models\OrganizationUser;
 use App\Shared\Interfaces\AggregateRootInterface;
+use App\ValueObjects\OrganizationId;
 
 class OrganizationAggregate implements AggregateRootInterface
 {
     private EloquentOrganization $organization;
-    
+
     public function __construct(EloquentOrganization $organization)
     {
         $this->organization = $organization;
@@ -37,7 +37,7 @@ class OrganizationAggregate implements AggregateRootInterface
         // Check if user is already a member
         $existingMembership = OrganizationUser::where([
             'organization_id' => $this->organization->id,
-            'user_id' => $userId
+            'user_id' => $userId,
         ])->first();
 
         if ($existingMembership) {
@@ -61,7 +61,7 @@ class OrganizationAggregate implements AggregateRootInterface
 
         OrganizationUser::where([
             'organization_id' => $this->organization->id,
-            'user_id' => $userId
+            'user_id' => $userId,
         ])->delete();
     }
 

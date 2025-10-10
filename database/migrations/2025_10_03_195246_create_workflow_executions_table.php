@@ -27,7 +27,7 @@ return new class extends Migration
             $table->json('statistics')->nullable(); // Performance stats
             $table->smallInteger('priority')->default(0); // Execution priority
             $table->timestamps();
-            
+
             $table->index('status');
             $table->index('started_at');
             $table->index('workflow_id');

@@ -10,7 +10,7 @@ class GetOrganizationQueryHandler implements QueryHandlerInterface
 {
     public function handle(QueryInterface $query)
     {
-        if (!$query instanceof GetOrganizationQuery) {
+        if (! $query instanceof GetOrganizationQuery) {
             throw new \InvalidArgumentException('Invalid query type');
         }
 
@@ -19,8 +19,8 @@ class GetOrganizationQueryHandler implements QueryHandlerInterface
             ->organizationMemberships()
             ->where('organization_id', $query->organizationId)
             ->first();
-            
-        if (!$membership) {
+
+        if (! $membership) {
             return null;
         }
 

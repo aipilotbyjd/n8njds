@@ -18,8 +18,8 @@ class OrganizationMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         $organizationId = $request->route('organization');
-        
-        if (!$organizationId) {
+
+        if (! $organizationId) {
             return $next($request);
         }
 
@@ -27,16 +27,16 @@ class OrganizationMiddleware
         if ($organizationId instanceof Organization) {
             $organizationId = $organizationId->id;
         }
-        
+
         $user = Auth::user();
-        
+
         // Check if user has access to this organization
         $hasAccess = $user->organizations()->where('organization_id', $organizationId)->exists() ||
                      $user->ownedOrganizations()->where('id', $organizationId)->exists();
-        
-        if (!$hasAccess) {
+
+        if (! $hasAccess) {
             return response()->json([
-                'message' => 'Unauthorized to access this organization'
+                'message' => 'Unauthorized to access this organization',
             ], 403);
         }
 

@@ -9,6 +9,5 @@ class GetOrganizationQuery implements QueryInterface
     public function __construct(
         public readonly int $organizationId,
         public readonly string $userId
-    ) {
-    }
+    ) {}
 }

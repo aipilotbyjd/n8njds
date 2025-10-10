@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('version');
             $table->timestamp('occurred_at')->useCurrent();
             $table->timestamps();
-            
+
             $table->index(['aggregate_type', 'aggregate_id']);
             $table->index(['aggregate_type', 'version']);
         });

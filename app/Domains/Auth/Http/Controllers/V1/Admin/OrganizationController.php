@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Api\V1\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Organization;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class OrganizationController extends Controller
 {
@@ -50,7 +50,7 @@ class OrganizationController extends Controller
 
         return response()->json([
             'message' => 'Organization updated successfully',
-            'organization' => $organization->load(['owner', 'users'])
+            'organization' => $organization->load(['owner', 'users']),
         ]);
     }
 
@@ -62,7 +62,7 @@ class OrganizationController extends Controller
         $organization->delete();
 
         return response()->json([
-            'message' => 'Organization deleted successfully'
+            'message' => 'Organization deleted successfully',
         ]);
     }
 }

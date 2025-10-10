@@ -4,8 +4,6 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Services\MonitoringService;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 
 class HealthCheckController extends Controller
@@ -52,8 +50,8 @@ class HealthCheckController extends Controller
 
     public function metrics()
     {
-        $monitoringService = new MonitoringService();
-        
+        $monitoringService = new MonitoringService;
+
         return response()->json([
             'system_health' => $monitoringService->getSystemHealth(),
             'timestamp' => now()->toISOString(),
@@ -64,7 +62,7 @@ class HealthCheckController extends Controller
     {
         // Get queue statistics
         $queueStats = [];
-        
+
         $connections = config('deployment.queues.connections', []);
         foreach ($connections as $name => $config) {
             if ($name === 'redis') {
@@ -99,8 +97,10 @@ class HealthCheckController extends Controller
                 $redis = app('redis')->connection();
                 // Check if we can access the queue
                 $redis->exists('laravel-queue-test');
+
                 return 'ok';
             }
+
             return 'ok'; // If not using redis, assume it's ok
         } catch (\Exception $e) {
             return 'error';

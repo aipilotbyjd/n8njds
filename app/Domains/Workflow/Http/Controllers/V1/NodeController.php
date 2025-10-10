@@ -31,7 +31,7 @@ class NodeController extends Controller
                 'description' => 'Log data for debugging purposes',
                 'type' => 'output',
                 'icon' => 'log',
-            ]
+            ],
         ];
 
         return response()->json(['nodes' => $nodeTypes]);
@@ -40,7 +40,7 @@ class NodeController extends Controller
     public function config(Request $request, string $nodeId)
     {
         // Return configuration schema for a specific node type
-        $config = match($nodeId) {
+        $config = match ($nodeId) {
             'manual-trigger' => [
                 'parameters' => [],
                 'outputs' => ['data'],

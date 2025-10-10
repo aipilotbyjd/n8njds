@@ -23,7 +23,7 @@ return new class extends Migration
             $table->integer('failed_count')->default(0);
             $table->json('settings')->nullable(); // Additional webhook settings
             $table->timestamps();
-            
+
             $table->foreign('workflow_id')->references('uuid')->on('workflows')->onDelete('cascade');
             $table->index(['workflow_id']);
             $table->index(['is_active']);
@@ -42,7 +42,7 @@ return new class extends Migration
             $table->integer('execution_count')->default(0);
             $table->json('settings')->nullable(); // Additional trigger settings
             $table->timestamps();
-            
+
             $table->foreign('workflow_id')->references('uuid')->on('workflows')->onDelete('cascade');
             $table->index(['workflow_id']);
             $table->index(['type']);

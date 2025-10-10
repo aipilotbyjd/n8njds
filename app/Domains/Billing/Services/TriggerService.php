@@ -5,13 +5,12 @@ namespace App\Services;
 use App\Models\Trigger;
 use App\Models\Workflow;
 use App\Shared\Interfaces\ServiceInterface;
-use Illuminate\Support\Facades\Http;
 
 class TriggerService implements ServiceInterface
 {
     public function handleTrigger(Trigger $trigger, array $payload = []): bool
     {
-        if (!$trigger->is_active) {
+        if (! $trigger->is_active) {
             return false;
         }
 
@@ -23,11 +22,11 @@ class TriggerService implements ServiceInterface
 
             // Execute the associated workflow
             $workflow = $trigger->workflow;
-            
+
             if ($workflow && $workflow->isExecutable()) {
-                $executionService = new WorkflowExecutionService();
+                $executionService = new WorkflowExecutionService;
                 $executionService->executeWorkflow($workflow, $payload);
-                
+
                 return true;
             }
 
@@ -38,7 +37,7 @@ class TriggerService implements ServiceInterface
                 'trigger_id' => $trigger->id,
                 'error' => $e->getMessage(),
             ]);
-            
+
             return false;
         }
     }
@@ -74,13 +73,13 @@ class TriggerService implements ServiceInterface
         if ($trigger->type === 'schedule' && $trigger->is_active) {
             $configuration = $trigger->configuration;
             $scheduleExpression = $configuration['cron'] ?? null;
-            
+
             if ($scheduleExpression) {
                 // In a real implementation, you'd use Laravel's task scheduling
                 // or a job queue to handle scheduled triggers
                 \Log::info("Scheduled trigger created for workflow {$trigger->workflow_id}", [
                     'cron' => $scheduleExpression,
-                    'trigger_id' => $trigger->id
+                    'trigger_id' => $trigger->id,
                 ]);
             }
         }
@@ -96,7 +95,7 @@ class TriggerService implements ServiceInterface
         foreach ($scheduledTriggers as $trigger) {
             $configuration = $trigger->configuration;
             $scheduleExpression = $configuration['cron'] ?? null;
-            
+
             // Check if the trigger should run now based on the cron expression
             if ($this->shouldRunNow($scheduleExpression)) {
                 $this->handleTrigger($trigger);
@@ -106,7 +105,7 @@ class TriggerService implements ServiceInterface
 
     private function shouldRunNow(?string $cronExpression): bool
     {
-        if (!$cronExpression) {
+        if (! $cronExpression) {
             return false;
         }
 

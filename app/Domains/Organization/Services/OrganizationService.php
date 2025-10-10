@@ -3,9 +3,9 @@
 namespace App\Domains\Organization\Services;
 
 use App\Domains\Organization\DataTransferObjects\OrganizationData;
+use App\Domains\Organization\Repositories\OrganizationRepository;
 use App\Models\Organization;
 use App\Models\OrganizationUser;
-use App\Domains\Organization\Repositories\OrganizationRepository;
 use App\Shared\Interfaces\ServiceInterface;
 use Illuminate\Support\Str;
 
@@ -13,8 +13,7 @@ class OrganizationService implements ServiceInterface
 {
     public function __construct(
         private OrganizationRepository $repository
-    ) {
-    }
+    ) {}
 
     public function create(OrganizationData $data): Organization
     {

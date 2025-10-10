@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Api\V1\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Auth\Events\Verified;
-use Illuminate\Http\Request;
-use Illuminate\Http\JsonResponse;
 use App\Models\User;
+use Illuminate\Auth\Events\Verified;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class EmailVerificationController extends Controller
 {
@@ -17,14 +17,14 @@ class EmailVerificationController extends Controller
     {
         if ($request->user()->hasVerifiedEmail()) {
             return response()->json([
-                'message' => 'Email already verified.'
+                'message' => 'Email already verified.',
             ], 422);
         }
 
         $request->user()->sendEmailVerificationNotification();
 
         return response()->json([
-            'message' => 'Verification link sent!'
+            'message' => 'Verification link sent!',
         ]);
     }
 
@@ -35,15 +35,15 @@ class EmailVerificationController extends Controller
     {
         $user = User::find($request->route('id'));
 
-        if (!$user || !hash_equals((string) $request->route('hash'), sha1($user->getEmailForVerification()))) {
+        if (! $user || ! hash_equals((string) $request->route('hash'), sha1($user->getEmailForVerification()))) {
             return response()->json([
-                'message' => 'Invalid verification link.'
+                'message' => 'Invalid verification link.',
             ], 422);
         }
 
         if ($user->hasVerifiedEmail()) {
             return response()->json([
-                'message' => 'Email already verified.'
+                'message' => 'Email already verified.',
             ]);
         }
 
@@ -52,7 +52,7 @@ class EmailVerificationController extends Controller
         }
 
         return response()->json([
-            'message' => 'Email verified successfully.'
+            'message' => 'Email verified successfully.',
         ]);
     }
 }

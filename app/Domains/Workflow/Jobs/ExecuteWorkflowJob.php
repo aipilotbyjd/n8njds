@@ -2,13 +2,13 @@
 
 namespace App\Jobs\Workflows;
 
-use Illuminate\Bus\Queueable;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Foundation\Bus\Dispatchable;
 use App\Models\WorkflowExecution;
 use App\Workflows\Executions\WorkflowEngine;
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 
 class ExecuteWorkflowJob implements ShouldQueue
 {
@@ -19,14 +19,13 @@ class ExecuteWorkflowJob implements ShouldQueue
     public function __construct(
         public string $executionId,
         public array $input
-    ) {
-    }
+    ) {}
 
     public function handle(): void
     {
         $execution = WorkflowExecution::where('execution_uuid', $this->executionId)->first();
-        
-        if (!$execution) {
+
+        if (! $execution) {
             return; // Execution might have been deleted
         }
 
@@ -35,16 +34,17 @@ class ExecuteWorkflowJob implements ShouldQueue
 
         try {
             $workflow = $execution->workflow;
-            
-            if (!$workflow || !$workflow->is_active) {
+
+            if (! $workflow || ! $workflow->is_active) {
                 $execution->update([
                     'status' => 'error',
                     'error' => ['message' => 'Workflow is not active or does not exist'],
                 ]);
+
                 return;
             }
 
-            $engine = new WorkflowEngine();
+            $engine = new WorkflowEngine;
             $result = $engine->execute($workflow, $this->input);
 
             // The execution is already updated by the engine, but we might need to update it again

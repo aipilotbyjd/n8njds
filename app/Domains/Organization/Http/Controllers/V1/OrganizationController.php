@@ -3,19 +3,18 @@
 namespace App\Domains\Organization\Http\Controllers\V1;
 
 use App\Domains\Organization\DataTransferObjects\OrganizationData;
+use App\Domains\Organization\Services\OrganizationApplicationService;
 use App\Http\Controllers\Controller;
 use App\Models\Organization;
-use App\Domains\Organization\Services\OrganizationApplicationService;
-use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class OrganizationController extends Controller
 {
     public function __construct(
         private OrganizationApplicationService $organizationService
-    ) {
-    }
+    ) {}
 
     /**
      * Display a listing of the organizations for the authenticated user.
@@ -23,11 +22,11 @@ class OrganizationController extends Controller
     public function index(Request $request): JsonResponse
     {
         $user = $request->user();
-        
+
         $organizations = $user->organizations()->get();
-        
+
         return response()->json([
-            'organizations' => $organizations
+            'organizations' => $organizations,
         ]);
     }
 
@@ -45,7 +44,7 @@ class OrganizationController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'message' => 'Validation failed',
-                'errors' => $validator->errors()
+                'errors' => $validator->errors(),
             ], 422);
         }
 
@@ -60,12 +59,12 @@ class OrganizationController extends Controller
 
         // Set this as the user's current organization
         $request->user()->update([
-            'current_organization_id' => $aggregate->getId()->value
+            'current_organization_id' => $aggregate->getId()->value,
         ]);
 
         return response()->json([
             'message' => 'Organization created successfully',
-            'organization' => $aggregate
+            'organization' => $aggregate,
         ], 201);
     }
 
@@ -75,20 +74,20 @@ class OrganizationController extends Controller
     public function show(Organization $organization, Request $request): JsonResponse
     {
         $user = $request->user();
-        
+
         // Check if user has access to this organization
         $membership = $user->organizationMemberships()
             ->where('organization_id', $organization->id)
             ->first();
-            
-        if (!$membership) {
+
+        if (! $membership) {
             return response()->json([
-                'message' => 'Unauthorized to access this organization'
+                'message' => 'Unauthorized to access this organization',
             ], 403);
         }
 
         return response()->json([
-            'organization' => $organization->load('owner')
+            'organization' => $organization->load('owner'),
         ]);
     }
 
@@ -98,11 +97,11 @@ class OrganizationController extends Controller
     public function update(Request $request, Organization $organization): JsonResponse
     {
         $user = $request->user();
-        
+
         // Check if user is the owner of the organization
         if ($organization->owner_id !== $user->id) {
             return response()->json([
-                'message' => 'Unauthorized to update this organization'
+                'message' => 'Unauthorized to update this organization',
             ], 403);
         }
 
@@ -115,7 +114,7 @@ class OrganizationController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'message' => 'Validation failed',
-                'errors' => $validator->errors()
+                'errors' => $validator->errors(),
             ], 422);
         }
 
@@ -129,14 +128,15 @@ class OrganizationController extends Controller
         $aggregate = $this->organizationService->getOrganization($organization->id);
         if ($aggregate) {
             $updatedAggregate = $this->organizationService->updateOrganization($aggregate, $data);
+
             return response()->json([
                 'message' => 'Organization updated successfully',
-                'organization' => $updatedAggregate
+                'organization' => $updatedAggregate,
             ]);
         }
 
         return response()->json([
-            'message' => 'Organization not found'
+            'message' => 'Organization not found',
         ], 404);
     }
 
@@ -146,25 +146,25 @@ class OrganizationController extends Controller
     public function switch(Organization $organization, Request $request): JsonResponse
     {
         $user = $request->user();
-        
+
         // Check if user belongs to this organization
         $membership = $user->organizationMemberships()
             ->where('organization_id', $organization->id)
             ->first();
-            
-        if (!$membership) {
+
+        if (! $membership) {
             return response()->json([
-                'message' => 'Unauthorized to access this organization'
+                'message' => 'Unauthorized to access this organization',
             ], 403);
         }
-        
+
         $user->update([
-            'current_organization_id' => $organization->id
+            'current_organization_id' => $organization->id,
         ]);
 
         return response()->json([
             'message' => 'Organization switched successfully',
-            'organization' => $organization
+            'organization' => $organization,
         ]);
     }
 
@@ -174,11 +174,11 @@ class OrganizationController extends Controller
     public function destroy(Organization $organization, Request $request): JsonResponse
     {
         $user = $request->user();
-        
+
         // Check if user is the owner of the organization
         if ($organization->owner_id !== $user->id) {
             return response()->json([
-                'message' => 'Unauthorized to delete this organization'
+                'message' => 'Unauthorized to delete this organization',
             ], 403);
         }
 
@@ -188,7 +188,7 @@ class OrganizationController extends Controller
         }
 
         return response()->json([
-            'message' => 'Organization deleted successfully'
+            'message' => 'Organization deleted successfully',
         ]);
     }
 }

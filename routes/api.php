@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 Route::group([
     'prefix' => 'v1',
     'as' => 'api.v1.',
-    'middleware' => ['api']
+    'middleware' => ['api'],
 ], function () {
     // Public authentication routes
     Route::group(['as' => 'auth.'], function () {
@@ -49,12 +49,13 @@ Route::group([
         });
 
         // Organization domain
-        
+
         Route::group(['as' => 'organizations.', 'middleware' => ['organization']], function () {
             Route::apiResource('organizations', \App\Domains\Organization\Http\Controllers\V1\OrganizationController::class);
             Route::post('organizations/{organization}/switch', [\App\Domains\Organization\Http\Controllers\V1\OrganizationController::class, 'switch'])->name('switch');
             Route::apiResource('organizations/{organization}/members', \App\Domains\Organization\Http\Controllers\V1\OrganizationMemberController::class)->except(['show', 'update']);
-            Route::put('organizations/{organization}/members/{member}', [\App\Domains\Organization\Http\Controllers\V1\OrganizationMemberController::class, 'update'])->name('members.update');        });
+            Route::put('organizations/{organization}/members/{member}', [\App\Domains\Organization\Http\Controllers\V1\OrganizationMemberController::class, 'update'])->name('members.update');
+        });
 
         // Credential domain
         Route::group(['as' => 'credentials.', 'prefix' => 'credentials'], function () {

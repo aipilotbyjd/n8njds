@@ -2,8 +2,8 @@
 
 namespace App\Domains\Workflow\Actions;
 
-use App\Domains\Workflow\Models\Workflow;
 use App\Domains\Workflow\DTOs\WorkflowDTO;
+use App\Domains\Workflow\Models\Workflow;
 use Illuminate\Support\Facades\DB;
 
 class CreateWorkflowAction

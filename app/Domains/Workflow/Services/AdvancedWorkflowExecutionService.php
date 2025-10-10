@@ -6,16 +6,14 @@ use App\Jobs\Workflows\ExecuteWorkflowJob;
 use App\Models\Workflow;
 use App\Models\WorkflowExecution;
 use App\Services\EventStoreService;
-use Illuminate\Support\Facades\Queue;
 
 class AdvancedWorkflowExecutionService
 {
     public function __construct(
         private EventStoreService $eventStore
-    ) {
-    }
+    ) {}
 
-    public function executeWorkflow(Workflow $workflow, array $input = [], string $userId = null): WorkflowExecution
+    public function executeWorkflow(Workflow $workflow, array $input = [], ?string $userId = null): WorkflowExecution
     {
         // Create a new execution record
         $execution = WorkflowExecution::create([
@@ -32,17 +30,18 @@ class AdvancedWorkflowExecutionService
         return $execution;
     }
 
-    public function executeWorkflowNow(Workflow $workflow, array $input = [], string $userId = null): array
+    public function executeWorkflowNow(Workflow $workflow, array $input = [], ?string $userId = null): array
     {
-        $engine = new WorkflowEngine();
+        $engine = new WorkflowEngine;
+
         return $engine->execute($workflow, $input);
     }
 
     public function getExecutionStatus(string $executionId): ?array
     {
         $execution = WorkflowExecution::where('execution_uuid', $executionId)->first();
-        
-        if (!$execution) {
+
+        if (! $execution) {
             return null;
         }
 

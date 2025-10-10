@@ -8,7 +8,7 @@ class OrganizationRepository extends BaseRepository
 {
     public function __construct()
     {
-        $this->model = new Organization();
+        $this->model = new Organization;
     }
 
     public function findBySlug(string $slug)

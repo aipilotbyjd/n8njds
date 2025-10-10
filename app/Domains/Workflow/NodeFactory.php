@@ -17,11 +17,12 @@ class NodeFactory
 
     public static function create(string $type, string $id, string $name, array $parameters = []): ?NodeInterface
     {
-        if (!isset(self::$nodeTypes[$type])) {
+        if (! isset(self::$nodeTypes[$type])) {
             return null;
         }
 
         $class = self::$nodeTypes[$type];
+
         return new $class($id, $name, $parameters);
     }
 

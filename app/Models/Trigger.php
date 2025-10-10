@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Trigger extends Model
 {
@@ -31,6 +31,7 @@ class Trigger extends Model
     ];
 
     protected $keyType = 'string';
+
     public $incrementing = false;
 
     protected static function boot()

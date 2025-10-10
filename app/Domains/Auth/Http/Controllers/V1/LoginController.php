@@ -2,17 +2,16 @@
 
 namespace App\Domains\Auth\Http\Controllers\V1;
 
-use App\Http\Controllers\Controller;
 use App\Domains\Auth\Services\UserAuthenticationService;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
     public function __construct(
         private UserAuthenticationService $authService
-    ) {
-    }
+    ) {}
 
     /**
      * Handle an authentication attempt.
@@ -26,9 +25,9 @@ class LoginController extends Controller
 
         $result = $this->authService->authenticate($request->email, $request->password);
 
-        if (!$result) {
+        if (! $result) {
             return response()->json([
-                'message' => 'The provided credentials are incorrect.'
+                'message' => 'The provided credentials are incorrect.',
             ], 422);
         }
 
@@ -49,12 +48,12 @@ class LoginController extends Controller
 
         if ($success) {
             return response()->json([
-                'message' => 'Logout successful'
+                'message' => 'Logout successful',
             ]);
         }
 
         return response()->json([
-            'message' => 'Logout failed'
+            'message' => 'Logout failed',
         ], 400);
     }
 
@@ -64,7 +63,7 @@ class LoginController extends Controller
     public function me(Request $request): JsonResponse
     {
         return response()->json([
-            'user' => $request->user()
+            'user' => $request->user(),
         ]);
     }
 
@@ -74,7 +73,7 @@ class LoginController extends Controller
     public function refresh(Request $request): JsonResponse
     {
         $user = $request->user();
-        
+
         // Revoke current token
         $tokenId = $request->bearerToken();
         $token = $user->tokens()->where('id', $tokenId)->first();

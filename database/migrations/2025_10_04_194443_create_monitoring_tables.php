@@ -20,7 +20,7 @@ return new class extends Migration
             $table->json('labels')->nullable(); // Additional labels for the metric
             $table->timestamp('measured_at');
             $table->timestamps();
-            
+
             $table->foreign('workflow_id')->references('uuid')->on('workflows')->onDelete('cascade');
             $table->index(['workflow_id']);
             $table->index(['metric_name']);
@@ -39,7 +39,7 @@ return new class extends Migration
             $table->uuid('execution_id')->nullable(); // Execution associated with the log
             $table->timestamp('logged_at');
             $table->timestamps();
-            
+
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
             $table->foreign('workflow_id')->references('uuid')->on('workflows')->onDelete('set null');
             $table->index(['level']);
@@ -60,7 +60,7 @@ return new class extends Migration
             $table->json('tags')->nullable(); // Additional tags for the metric
             $table->timestamp('measured_at');
             $table->timestamps();
-            
+
             $table->foreign('workflow_id')->references('uuid')->on('workflows')->onDelete('cascade');
             $table->foreign('execution_id')->references('id')->on('workflow_executions')->onDelete('cascade');
             $table->index(['metric_type']);

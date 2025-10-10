@@ -10,7 +10,7 @@ class IfNode extends BaseNode
     {
         $condition = $this->parameters['condition'] ?? 'true';
 
-        $expressionLanguage = new ExpressionLanguage();
+        $expressionLanguage = new ExpressionLanguage;
         $result = $expressionLanguage->evaluate($condition, ['input' => $input]);
 
         return [

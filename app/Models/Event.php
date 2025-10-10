@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Event extends Model
 {
@@ -25,5 +25,6 @@ class Event extends Model
     ];
 
     protected $keyType = 'string';
+
     public $incrementing = false;
 }

@@ -2,8 +2,8 @@
 
 namespace App\Services;
 
-use App\Models\User;
 use App\Models\Organization;
+use App\Models\User;
 use App\Shared\Interfaces\ServiceInterface;
 
 class UserAuthorizationService implements ServiceInterface
@@ -19,7 +19,7 @@ class UserAuthorizationService implements ServiceInterface
         $membership = $user->organizationMemberships()
             ->where('organization_id', $organization->id)
             ->first();
-            
+
         return $membership && in_array($membership->role, ['owner', 'admin']);
     }
 
@@ -39,7 +39,7 @@ class UserAuthorizationService implements ServiceInterface
         $membership = $user->organizationMemberships()
             ->where('organization_id', $organization->id)
             ->first();
-            
+
         return $membership && in_array($membership->role, $roles);
     }
 }

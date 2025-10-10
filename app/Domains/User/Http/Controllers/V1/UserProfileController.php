@@ -14,7 +14,7 @@ class UserProfileController extends Controller
     {
         return $request->user();
     }
-    
+
     /**
      * Handle the incoming request.
      */
@@ -22,7 +22,7 @@ class UserProfileController extends Controller
     {
         return $request->user();
     }
-    
+
     /**
      * Update the authenticated user's profile.
      */
@@ -31,12 +31,12 @@ class UserProfileController extends Controller
         // Validate and update the user's profile
         $request->validate([
             'name' => 'sometimes|string|max:255',
-            'email' => 'sometimes|email|max:255|unique:users,email,' . $request->user()->id,
+            'email' => 'sometimes|email|max:255|unique:users,email,'.$request->user()->id,
         ]);
-        
+
         $user = $request->user();
         $user->update($request->only(['name', 'email']));
-        
+
         return response()->json($user);
     }
 }

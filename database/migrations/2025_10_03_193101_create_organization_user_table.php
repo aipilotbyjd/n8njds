@@ -19,7 +19,7 @@ return new class extends Migration
             $table->boolean('is_active')->default(true);
             $table->timestamp('joined_at')->useCurrent();
             $table->timestamps();
-            
+
             $table->unique(['organization_id', 'user_id']);
         });
     }

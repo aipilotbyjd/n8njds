@@ -3,8 +3,6 @@
 namespace App\Listeners;
 
 use App\Events\WorkflowExecuted;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 
 class LogWorkflowExecution
 {

@@ -2,7 +2,6 @@
 
 namespace App\Workflows\Commands;
 
-use App\DataTransferObjects\OrganizationData;
 use App\Models\Organization;
 use App\Models\OrganizationUser;
 use App\Shared\Interfaces\CommandHandlerInterface;
@@ -14,7 +13,7 @@ class CreateOrganizationCommandHandler implements CommandHandlerInterface
 {
     public function handle(CommandInterface $command)
     {
-        if (!$command instanceof CreateOrganizationCommand) {
+        if (! $command instanceof CreateOrganizationCommand) {
             throw new \InvalidArgumentException('Invalid command type');
         }
 

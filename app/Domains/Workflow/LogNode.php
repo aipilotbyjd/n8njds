@@ -8,9 +8,9 @@ class LogNode extends BaseNode
     {
         $logLevel = $this->parameters['level'] ?? 'info';
         $message = $this->parameters['message'] ?? json_encode($input);
-        
+
         // Log the message based on the level
-        match($logLevel) {
+        match ($logLevel) {
             'error' => \Log::error($message),
             'warning' => \Log::warning($message),
             'info' => \Log::info($message),
@@ -31,7 +31,7 @@ class LogNode extends BaseNode
     {
         $validLevels = ['debug', 'info', 'warning', 'error'];
         $level = $config['level'] ?? 'info';
-        
+
         return in_array($level, $validLevels);
     }
 

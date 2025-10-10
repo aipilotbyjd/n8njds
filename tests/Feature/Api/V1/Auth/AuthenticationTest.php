@@ -2,12 +2,11 @@
 
 namespace Tests\Feature\Api\V1\Auth;
 
-use Tests\TestCase;
 use App\Models\User;
-// use Illuminate\Foundation\Testing\RefreshDatabase; // Removed to avoid passport migration conflicts
 use Illuminate\Support\Facades\Hash;
+// use Illuminate\Foundation\Testing\RefreshDatabase; // Removed to avoid passport migration conflicts
 use Illuminate\Support\Facades\Password;
-use Illuminate\Support\Str;
+use Tests\TestCase;
 
 class AuthenticationTest extends TestCase
 {
@@ -23,12 +22,12 @@ class AuthenticationTest extends TestCase
         ]);
 
         $response->assertStatus(200)
-                 ->assertJsonStructure([
-                     'message',
-                     'user',
-                     'token',
-                     'token_type'
-                 ]);
+            ->assertJsonStructure([
+                'message',
+                'user',
+                'token',
+                'token_type',
+            ]);
     }
 
     public function test_user_cannot_register_with_invalid_data(): void
@@ -40,10 +39,10 @@ class AuthenticationTest extends TestCase
         ]);
 
         $response->assertStatus(422)
-                 ->assertJsonStructure([
-                     'message',
-                     'errors'
-                 ]);
+            ->assertJsonStructure([
+                'message',
+                'errors',
+            ]);
     }
 
     public function test_user_can_login(): void
@@ -59,12 +58,12 @@ class AuthenticationTest extends TestCase
         ]);
 
         $response->assertStatus(200)
-                 ->assertJsonStructure([
-                     'message',
-                     'user',
-                     'token',
-                     'token_type'
-                 ]);
+            ->assertJsonStructure([
+                'message',
+                'user',
+                'token',
+                'token_type',
+            ]);
     }
 
     public function test_user_cannot_login_with_invalid_credentials(): void
@@ -75,9 +74,9 @@ class AuthenticationTest extends TestCase
         ]);
 
         $response->assertStatus(422)
-                 ->assertJson([
-                     'message' => 'The provided credentials are incorrect.'
-                 ]);
+            ->assertJson([
+                'message' => 'The provided credentials are incorrect.',
+            ]);
     }
 
     public function test_user_can_logout(): void
@@ -90,13 +89,13 @@ class AuthenticationTest extends TestCase
         $token = $user->createToken('test-token')->accessToken;
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ])->postJson('/api/v1/logout');
 
         $response->assertStatus(200)
-                 ->assertJson([
-                     'message' => 'Logout successful'
-                 ]);
+            ->assertJson([
+                'message' => 'Logout successful',
+            ]);
     }
 
     public function test_user_can_get_profile(): void
@@ -109,17 +108,17 @@ class AuthenticationTest extends TestCase
         $token = $user->createToken('test-token')->accessToken;
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $token,
+            'Authorization' => 'Bearer '.$token,
         ])->getJson('/api/v1/user');
 
         $response->assertStatus(200)
-                 ->assertJson([
-                     'user' => [
-                         'id' => $user->id,
-                         'email' => $user->email,
-                         'name' => $user->name,
-                     ]
-                 ]);
+            ->assertJson([
+                'user' => [
+                    'id' => $user->id,
+                    'email' => $user->email,
+                    'name' => $user->name,
+                ],
+            ]);
     }
 
     public function test_user_can_refresh_token(): void
@@ -132,16 +131,16 @@ class AuthenticationTest extends TestCase
         $oldToken = $user->createToken('test-token')->accessToken;
 
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer ' . $oldToken,
+            'Authorization' => 'Bearer '.$oldToken,
         ])->postJson('/api/v1/refresh');
 
         $response->assertStatus(200)
-                 ->assertJsonStructure([
-                     'message',
-                     'user',
-                     'token',
-                     'token_type'
-                 ]);
+            ->assertJsonStructure([
+                'message',
+                'user',
+                'token',
+                'token_type',
+            ]);
 
         // Verify old token is revoked
         $user->refresh();
@@ -159,9 +158,9 @@ class AuthenticationTest extends TestCase
         ]);
 
         $response->assertStatus(200)
-                 ->assertJson([
-                     'message' => Password::RESET_LINK_SENT
-                 ]);
+            ->assertJson([
+                'message' => Password::RESET_LINK_SENT,
+            ]);
     }
 
     public function test_user_can_reset_password(): void
@@ -181,9 +180,9 @@ class AuthenticationTest extends TestCase
         ]);
 
         $response->assertStatus(200)
-                 ->assertJson([
-                     'message'
-                 ]);
+            ->assertJson([
+                'message',
+            ]);
 
         // Verify password was actually changed
         $this->assertTrue(Hash::check('new-password123', $user->fresh()->password));

@@ -2,26 +2,24 @@
 
 namespace App\Domains\Auth\Http\Controllers\V1;
 
-use App\Http\Controllers\Controller;
-use App\Models\Credential;
 use App\Domains\Auth\Services\CredentialService;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class CredentialController extends Controller
 {
     public function __construct(
         private CredentialService $credentialService
-    ) {
-    }
+    ) {}
 
     public function index(Request $request): JsonResponse
     {
         $credentials = $this->credentialService->getOwnedByUser($request->user());
-        
+
         return response()->json([
-            'credentials' => $credentials
+            'credentials' => $credentials,
         ]);
     }
 
@@ -41,7 +39,7 @@ class CredentialController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'message' => 'Validation failed',
-                'errors' => $validator->errors()
+                'errors' => $validator->errors(),
             ], 422);
         }
 
@@ -49,38 +47,38 @@ class CredentialController extends Controller
 
         return response()->json([
             'message' => 'Credential created successfully',
-            'credential' => $credential
+            'credential' => $credential,
         ], 201);
     }
 
     public function show(Request $request, string $id): JsonResponse
     {
         $credential = $this->credentialService->getById($id, $request->user());
-        
-        if (!$credential) {
+
+        if (! $credential) {
             return response()->json([
-                'message' => 'Credential not found'
+                'message' => 'Credential not found',
             ], 404);
         }
 
-        if (!$this->credentialService->canAccess($request->user(), $credential)) {
+        if (! $this->credentialService->canAccess($request->user(), $credential)) {
             return response()->json([
-                'message' => 'Unauthorized to access this credential'
+                'message' => 'Unauthorized to access this credential',
             ], 403);
         }
 
         return response()->json([
-            'credential' => $credential
+            'credential' => $credential,
         ]);
     }
 
     public function update(Request $request, string $id): JsonResponse
     {
         $credential = $this->credentialService->getById($id, $request->user());
-        
-        if (!$credential) {
+
+        if (! $credential) {
             return response()->json([
-                'message' => 'Credential not found'
+                'message' => 'Credential not found',
             ], 404);
         }
 
@@ -98,7 +96,7 @@ class CredentialController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'message' => 'Validation failed',
-                'errors' => $validator->errors()
+                'errors' => $validator->errors(),
             ], 422);
         }
 
@@ -106,40 +104,40 @@ class CredentialController extends Controller
 
         return response()->json([
             'message' => 'Credential updated successfully',
-            'credential' => $updatedCredential
+            'credential' => $updatedCredential,
         ]);
     }
 
     public function destroy(Request $request, string $id): JsonResponse
     {
         $credential = $this->credentialService->getById($id, $request->user());
-        
-        if (!$credential) {
+
+        if (! $credential) {
             return response()->json([
-                'message' => 'Credential not found'
+                'message' => 'Credential not found',
             ], 404);
         }
 
         $this->credentialService->delete($credential);
 
         return response()->json([
-            'message' => 'Credential deleted successfully'
+            'message' => 'Credential deleted successfully',
         ]);
     }
 
     public function rotate(Request $request, string $id): JsonResponse
     {
         $credential = $this->credentialService->getById($id, $request->user());
-        
-        if (!$credential) {
+
+        if (! $credential) {
             return response()->json([
-                'message' => 'Credential not found'
+                'message' => 'Credential not found',
             ], 404);
         }
 
-        if (!$this->credentialService->canAccess($request->user(), $credential)) {
+        if (! $this->credentialService->canAccess($request->user(), $credential)) {
             return response()->json([
-                'message' => 'Unauthorized to access this credential'
+                'message' => 'Unauthorized to access this credential',
             ], 403);
         }
 
@@ -147,7 +145,7 @@ class CredentialController extends Controller
 
         return response()->json([
             'message' => 'Credential rotated successfully',
-            'credential' => $rotatedCredential
+            'credential' => $rotatedCredential,
         ]);
     }
 }

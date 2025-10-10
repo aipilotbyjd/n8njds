@@ -44,6 +44,7 @@ class CredentialService implements ServiceInterface
         }
 
         $credential->update($updateData);
+
         return $credential;
     }
 
@@ -67,9 +68,9 @@ class CredentialService implements ServiceInterface
     public function getByUuid(string $uuid, User $user): ?Credential
     {
         return Credential::where('uuid', $uuid)
-            ->where(function($query) use ($user) {
+            ->where(function ($query) use ($user) {
                 $query->where('owned_by', $user->id)
-                      ->orWhereJsonContains('shared_with', $user->id);
+                    ->orWhereJsonContains('shared_with', $user->id);
             })
             ->first();
     }
@@ -77,7 +78,7 @@ class CredentialService implements ServiceInterface
     public function canAccess(User $user, Credential $credential): bool
     {
         // Check if user owns the credential or has it shared with them
-        return $credential->owned_by === $user->id || 
+        return $credential->owned_by === $user->id ||
                (is_array($credential->shared_with) && in_array($user->id, $credential->shared_with));
     }
 

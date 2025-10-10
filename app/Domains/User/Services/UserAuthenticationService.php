@@ -3,10 +3,9 @@
 namespace App\Services;
 
 use App\Models\User;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Auth;
-use Laravel\Passport\Token;
 use App\Shared\Interfaces\ServiceInterface;
+use Illuminate\Support\Facades\Hash;
+use Laravel\Passport\Token;
 
 class UserAuthenticationService implements ServiceInterface
 {
@@ -14,7 +13,7 @@ class UserAuthenticationService implements ServiceInterface
     {
         $user = User::where('email', $email)->first();
 
-        if (!$user || !Hash::check($password, $user->password)) {
+        if (! $user || ! Hash::check($password, $user->password)) {
             return null;
         }
 
@@ -53,11 +52,12 @@ class UserAuthenticationService implements ServiceInterface
     {
         // Revoke the current token
         $tokenId = request()->bearerToken();
-        
+
         // Get the current access token from Passport
         $accessToken = auth()->user()->token();
         if ($accessToken) {
             $accessToken->revoke();
+
             return true;
         }
 

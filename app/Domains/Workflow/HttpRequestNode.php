@@ -13,7 +13,7 @@ class HttpRequestNode extends BaseNode
         $headers = $this->parameters['headers'] ?? $input['headers'] ?? [];
         $body = $this->parameters['body'] ?? $input['body'] ?? [];
 
-        if (!$url) {
+        if (! $url) {
             return [
                 'status' => 'error',
                 'message' => 'URL is required',
@@ -51,6 +51,7 @@ class HttpRequestNode extends BaseNode
                 return false;
             }
         }
+
         return true;
     }
 

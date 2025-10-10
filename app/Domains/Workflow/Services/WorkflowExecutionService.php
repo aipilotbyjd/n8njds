@@ -4,11 +4,9 @@ namespace App\Domains\Workflow\Services;
 
 use App\Models\Workflow;
 use App\Models\WorkflowExecution;
-use App\Models\WorkflowVersion;
 use App\Shared\Interfaces\ServiceInterface;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\DB;
 
 class WorkflowExecutionService implements ServiceInterface
 {
@@ -18,7 +16,7 @@ class WorkflowExecutionService implements ServiceInterface
     public function executeWorkflow(Workflow $workflow, array $inputData = []): WorkflowExecution
     {
         // Validate that workflow can be executed
-        if (!$workflow->isExecutable()) {
+        if (! $workflow->isExecutable()) {
             throw new \Exception('Workflow is not executable');
         }
 
@@ -41,7 +39,7 @@ class WorkflowExecutionService implements ServiceInterface
         try {
             // Run the workflow execution
             $result = $this->runWorkflowExecution($workflow, $execution, $inputData);
-            
+
             // Update execution with results
             $execution->update([
                 'status' => 'success',
@@ -50,12 +48,12 @@ class WorkflowExecutionService implements ServiceInterface
                 'data' => array_merge($execution->data ?: [], $result['data'] ?? []),
                 'node_executions' => $result['node_executions'] ?? [],
                 'statistics' => array_merge(
-                    $execution->statistics ?: [], 
+                    $execution->statistics ?: [],
                     $result['statistics'] ?? [],
                     ['end_time' => now()->toISOString()]
                 ),
             ]);
-            
+
             // Update workflow stats
             $workflow->markAsExecuted();
         } catch (\Exception $e) {
@@ -70,14 +68,14 @@ class WorkflowExecutionService implements ServiceInterface
                     'trace' => $e->getTraceAsString(),
                 ],
             ]);
-            
+
             Log::error('Workflow execution failed', [
                 'workflow_id' => $workflow->uuid,
                 'execution_id' => $execution->execution_uuid,
                 'error' => $e->getMessage(),
                 'workflow_name' => $workflow->name,
             ]);
-            
+
             throw $e;
         }
 
@@ -95,22 +93,22 @@ class WorkflowExecutionService implements ServiceInterface
             'nodes_failed' => 0,
             'total_time' => 0,
         ];
-        
+
         // Get the workflow definition
         $nodes = $workflow->nodes ?: [];
         $connections = $workflow->connections ?: [];
-        
+
         // For now, we'll execute nodes in a simple manner
         // In a real implementation, you'd need to handle complex workflows with branching, parallel execution, etc.
         foreach ($nodes as $nodeId => $node) {
             try {
                 $startTime = microtime(true);
-                
+
                 // Execute the node
                 $nodeResult = $this->executeNode($node, $inputData, $execution);
-                
+
                 $executionTime = microtime(true) - $startTime;
-                
+
                 // Record node execution
                 $nodeExecutions[$nodeId] = [
                     'node_id' => $nodeId,
@@ -121,13 +119,13 @@ class WorkflowExecutionService implements ServiceInterface
                     'execution_time' => $executionTime,
                     'executed_at' => now()->toISOString(),
                 ];
-                
+
                 $executionStats['nodes_executed']++;
                 $executionStats['total_time'] += $executionTime;
-                
+
                 // Update input data for next node with this node's output
                 $inputData = $nodeResult;
-                
+
             } catch (\Exception $e) {
                 $nodeExecutions[$nodeId] = [
                     'node_id' => $nodeId,
@@ -140,14 +138,14 @@ class WorkflowExecutionService implements ServiceInterface
                     ],
                     'executed_at' => now()->toISOString(),
                 ];
-                
+
                 $executionStats['nodes_failed']++;
-                
+
                 // For now, we'll continue with other nodes, but in a real system you might want to stop
                 // depending on the workflow configuration and node failure handling
             }
         }
-        
+
         return [
             'data' => $inputData,
             'node_executions' => $nodeExecutions,
@@ -162,9 +160,9 @@ class WorkflowExecutionService implements ServiceInterface
     {
         // This is where you would call the appropriate node handler
         // based on the node type.
-        
+
         $nodeType = $node['type'] ?? 'unknown';
-        
+
         switch ($nodeType) {
             case 'http_request':
                 return $this->executeHttpRequestNode($node, $inputData);
@@ -186,19 +184,19 @@ class WorkflowExecutionService implements ServiceInterface
         // Extract node parameters
         $method = $node['parameters']['method'] ?? 'GET';
         $url = $node['parameters']['url'] ?? '';
-        
+
         if (empty($url)) {
             throw new \Exception('HTTP request node requires a URL');
         }
-        
+
         // Process URL with data substitution
         $url = $this->processTemplate($url, $inputData);
-        
+
         try {
             $response = \Illuminate\Support\Facades\Http::withHeaders(
                 $node['parameters']['headers'] ?? []
             )->{$method}($url, $node['parameters']['body'] ?? $inputData);
-            
+
             return [
                 'status' => $response->status(),
                 'data' => $response->json(),
@@ -212,7 +210,7 @@ class WorkflowExecutionService implements ServiceInterface
                 'error' => $e->getMessage(),
                 'execution_id' => $execution->execution_uuid,
             ]);
-            
+
             throw $e;
         }
     }
@@ -224,11 +222,11 @@ class WorkflowExecutionService implements ServiceInterface
     {
         // Extract code
         $code = $node['parameters']['code'] ?? '';
-        
+
         if (empty($code)) {
             throw new \Exception('Code node requires code to execute');
         }
-        
+
         // In a real implementation, you'd run the code in a sandboxed environment
         // For security reasons, actual code execution should be carefully controlled
         // For now, we'll simulate the execution:
@@ -246,7 +244,7 @@ class WorkflowExecutionService implements ServiceInterface
     {
         // Extract condition parameters
         $condition = $node['parameters']['condition'] ?? '';
-        
+
         // In a real implementation, evaluate the condition properly
         // For now, we return a default result
         return [
@@ -263,19 +261,19 @@ class WorkflowExecutionService implements ServiceInterface
         // More sophisticated template processing
         foreach ($data as $key => $value) {
             if (is_array($value)) {
-                $template = str_replace('{{' . $key . '}}', json_encode($value), $template);
+                $template = str_replace('{{'.$key.'}}', json_encode($value), $template);
             } else {
-                $template = str_replace('{{' . $key . '}}', $value, $template);
+                $template = str_replace('{{'.$key.'}}', $value, $template);
             }
         }
-        
+
         return $template;
     }
 
     /**
      * Schedule a workflow for execution
      */
-    public function scheduleWorkflow(Workflow $workflow, array $inputData = [], string $schedule = null): WorkflowExecution
+    public function scheduleWorkflow(Workflow $workflow, array $inputData = [], ?string $schedule = null): WorkflowExecution
     {
         // Create an execution with scheduled status
         return WorkflowExecution::create([
@@ -302,10 +300,10 @@ class WorkflowExecutionService implements ServiceInterface
                 'status' => 'canceled',
                 'finished_at' => now(),
             ]);
-            
+
             return true;
         }
-        
+
         return false;
     }
 
@@ -315,7 +313,7 @@ class WorkflowExecutionService implements ServiceInterface
     public function getExecutionStats(Workflow $workflow): array
     {
         $executions = $workflow->executions();
-        
+
         return [
             'total_executions' => $executions->count(),
             'successful_executions' => $executions->where('status', 'success')->count(),

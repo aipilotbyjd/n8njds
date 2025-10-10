@@ -12,6 +12,5 @@ class OrganizationData extends Data
         public string $timezone = 'UTC',
         public ?array $settings = null,
         public ?string $userId = null, // Owner ID
-    ) {
-    }
+    ) {}
 }
